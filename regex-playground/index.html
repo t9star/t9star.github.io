@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regex Playground & Explainer - T9S Studio</title>
+    <meta name="description" content="リアルタイムに正規表現のマッチングを確認し、複雑な正規表現パターンを分かりやすく分解解説する、開発者のためのPlaygroundツールです。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="app-container">
+        <!-- ヘッダー -->
+        <header class="app-header">
+            <div class="header-left">
+                <a href="../index.html" class="back-link">
+                    <span class="icon">←</span> Portal
+                </a>
+                <span class="divider">|</span>
+                <span class="logo-icon">🌲</span>
+                <div class="title-group">
+                    <h1>Regex Playground & Explainer</h1>
+                    <p>Test regular expressions with real-time matching and step-by-step breakdown</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-secondary btn-sm" id="pro-status-btn">💎 Get Pro</button>
+            </div>
+        </header>
+
+        <!-- メインエリア -->
+        <main class="app-main">
+            <!-- 左カラム: パターン入力 ＆ テンプレート -->
+            <section class="config-column">
+                <!-- パターン入力 -->
+                <div class="card config-card">
+                    <h3>Expression Pattern</h3>
+                    <div class="regex-input-row">
+                        <span class="regex-slash">/</span>
+                        <input type="text" id="regex-pattern" placeholder="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                        <span class="regex-slash">/</span>
+                        <div class="flags-group">
+                            <label class="flag-label" title="Global (すべてのマッチ)"><input type="checkbox" id="flag-g" checked>g</label>
+                            <label class="flag-label" title="Case insensitive (大文字小文字を区別しない)"><input type="checkbox" id="flag-i" checked>i</label>
+                            <label class="flag-label" title="Multiline (複数行マッチ)"><input type="checkbox" id="flag-m">m</label>
+                        </div>
+                    </div>
+                    <!-- エラーインジケーター -->
+                    <div class="regex-error hidden" id="regex-syntax-error">
+                        Invalid regular expression.
+                    </div>
+                </div>
+
+                <!-- テンプレート集 -->
+                <div class="card templates-card">
+                    <h3>Quick Templates</h3>
+                    <div class="template-list">
+                        <button class="tpl-btn" data-pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" data-flags="gi" data-text="Welcome to T9S Studio. Contact us at support@t9s.app or info@example.com for queries.">✉️ Email Address</button>
+                        <button class="tpl-btn" data-pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)" data-flags="g" data-text="Check our portal at https://t9star.github.io/ or the tools at http://t9star.github.io/mockup-studio/.">🔗 URL (HTTP/HTTPS)</button>
+                        <button class="tpl-btn" data-pattern="\b\d{4}[-\/]\d{2}[-\/]\d{2}\b" data-flags="g" data-text="The deployment date is 2026-06-11, and the next review is scheduled for 2026/07/15.">📅 Date (YYYY-MM-DD)</button>
+                        <button class="tpl-btn" data-pattern="\b0\d{1,4}-\d{1,4}-\d{4}\b" data-flags="g" data-text="You can call us at 03-1234-5678 or fax to 090-9876-5432.">📞 Phone Number (Japan)</button>
+                        <button class="tpl-btn" data-pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}" data-flags="g" data-text="Pass1234 (Valid)\npassword (Invalid - no uppercase/digit)\nUPPER123 (Invalid - no lowercase)">🔒 Strong Password</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 右カラム: テキスト入力 ＆ ハイライト表示 ＆ 解説 -->
+            <section class="workspace-column">
+                <!-- テキストハイライトエリア -->
+                <div class="card editor-card">
+                    <div class="card-header">
+                        <span>Test String (対象テキスト)</span>
+                        <span class="match-counter" id="match-count-badge">0 matches</span>
+                    </div>
+                    <!-- レイヤードエディタコンテナ -->
+                    <div class="editor-wrapper">
+                        <div class="backdrop" id="highlight-backdrop">
+                            <div class="highlights" id="highlight-overlay">
+                                <!-- ハイライトHTMLがここに動的同期されます -->
+                            </div>
+                        </div>
+                        <textarea id="test-text" spellcheck="false">Welcome to T9S Studio. Contact us at support@t9s.app or info@example.com for queries. You can also view our site at https://t9star.github.io/.</textarea>
+                    </div>
+                </div>
+
+                <!-- 分解解説 (Explainer) -->
+                <div class="card explainer-card">
+                    <div class="card-header">
+                        <span>Pattern Breakdown & Explainer <span class="badge-pro">Pro</span></span>
+                    </div>
+                    <div class="explainer-body" id="explainer-container">
+                        <!-- 解説文がここに生成されます -->
+                        <div class="pro-locked-overlay" id="explainer-lock">
+                            <p>💎 **Visual Explainer**</p>
+                            <p class="lock-desc">正規表現をパーツごとに分解し、人間が理解しやすい言葉で解説するプロ機能です。アンロックして複雑なパターンのデバッグに役立てましょう。</p>
+                            <button class="btn btn-secondary btn-sm" id="btn-unlock-explainer">Pro機能をアンロックする</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI正規表現生成器 (AI Generator) -->
+                <div class="card ai-card">
+                    <div class="card-header">
+                        <span>AI Regex Prompt Generator <span class="badge-pro">Pro</span></span>
+                    </div>
+                    <div class="ai-body">
+                        <div class="pro-locked-overlay" id="ai-generator-lock">
+                            <p>💎 **AI Regex Prompt Generator**</p>
+                            <p class="lock-desc">「日本の郵便番号」「特定の文字から始まる文字列」など、自然言語を入力するだけで正規表現を自動生成するAIアシスタント機能です。</p>
+                            <button class="btn btn-secondary btn-sm" id="btn-unlock-ai">Pro機能をアンロックする</button>
+                        </div>
+                        <div class="ai-content-inner hidden" id="ai-generator-content">
+                            <label for="ai-prompt-input">どのような正規表現を作りたいですか？ (自然言語で入力)</label>
+                            <div class="input-group">
+                                <input type="text" id="ai-prompt-input" placeholder="例: 3桁-4桁の日本の郵便番号にマッチするもの">
+                                <button class="btn btn-primary btn-sm" id="btn-ai-generate">AI Generate</button>
+                            </div>
+                            <div class="ai-result-box hidden" id="ai-result-box">
+                                <div class="ai-result-header">
+                                    <span>Generated Pattern:</span>
+                                    <button class="action-btn" id="btn-use-ai-pattern">Use this pattern</button>
+                                </div>
+                                <code id="ai-result-pattern">^\d{3}-\d{4}$</code>
+                                <p id="ai-result-explain">解説: 3桁の数字、ハイフン、4桁の数字に順番に一致し、文字列全体がこれに適合することを示します。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- フッター -->
+        <footer class="app-footer">
+            <p>© 2026 T9S Studio. Execution takes place purely on client-side.</p>
+            <div class="footer-fund-info">
+                <span>💻 PC Fund: <strong>$185 / $1,200</strong></span>
+                <span class="divider">|</span>
+                <a href="#support" id="footer-support-link">☕ Support Project</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Proアンロックモーダル -->
+    <div class="modal" id="pro-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💎 Pro Features Unlock</h2>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>「正規表現のビジュアル解説 (Explainer)」</strong>および<strong>「自然言語AI正規表現生成 (AI Generator)」</strong>はPro版の限定機能です。
+                </p>
+                <div class="modal-fund-box">
+                    <h4>新しい開発PC基金へのご協力をお願いします</h4>
+                    <p>
+                        現在、開発者はオンデバイスAI開発などのため、新しいPCの購入資金を募っています。もしツールがお役に立ちましたら、Buy Me a Coffeeでの <strong>$3 以上</strong> のご支援、またはプロジェクトの応援をお願いします！
+                    </p>
+                    <div class="modal-action-links">
+                        <a href="https://www.buymeacoffee.com/" target="_blank" class="btn btn-primary btn-sm">☕ Buy Me a Coffee ($3~)</a>
+                    </div>
+                </div>
+                <div class="unlock-form">
+                    <label for="pro-key-input">アンロックキーを入力してください</label>
+                    <div class="input-group">
+                        <input type="text" id="pro-key-input" placeholder="T9S-XXXX-XXXX">
+                        <button class="btn btn-secondary" id="btn-submit-key">Apply Key</button>
+                    </div>
+                    <p class="error-msg hidden" id="key-error-msg">無効なキーです。もう一度お確かめください。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div class="toast hidden" id="toast-notification"></div>
+</body>
+</html>

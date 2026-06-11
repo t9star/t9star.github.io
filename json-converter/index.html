@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Schema & Type Converter - T9S Studio</title>
+    <meta name="description" content="JSONの整形、圧縮、バリデーションに加え、YAML、XML、CSV、さらにはTypeScript/Go等の型定義コードへ瞬時に変換できる高機能ツールです。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="app-container">
+        <!-- ヘッダー -->
+        <header class="app-header">
+            <div class="header-left">
+                <a href="../index.html" class="back-link">
+                    <span class="icon">←</span> Portal
+                </a>
+                <span class="divider">|</span>
+                <span class="logo-icon">📋</span>
+                <div class="title-group">
+                    <h1>JSON Schema & Type Converter</h1>
+                    <p>Format, validate, and convert JSON to TypeScript, Go, and more</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-secondary btn-sm" id="pro-status-btn">💎 Get Pro</button>
+            </div>
+        </header>
+
+        <!-- メインエリア -->
+        <main class="app-main">
+            <!-- 左ペイン: 入力エディタ -->
+            <section class="editor-pane">
+                <div class="panel-header">
+                    <span class="panel-title">Input JSON</span>
+                    <div class="panel-actions">
+                        <button class="action-btn" id="btn-format">✨ Format</button>
+                        <button class="action-btn" id="btn-minify">⚡ Minify</button>
+                        <button class="action-btn" id="btn-clear">🗑️ Clear</button>
+                    </div>
+                </div>
+                <div class="editor-container">
+                    <textarea id="json-input" placeholder='{\n  "status": "success",\n  "data": {\n    "id": 101,\n    "name": "T9S Studio",\n    "features": ["Secure", "Offline", "Fast"],\n    "active": true\n  }\n}'></textarea>
+                </div>
+                <!-- エラー/バリデーション結果バナー -->
+                <div class="error-banner hidden" id="validation-error">
+                    <span class="error-title">❌ Syntax Error:</span>
+                    <p class="error-desc" id="error-message">Line 1: ...</p>
+                </div>
+            </section>
+
+            <!-- 中央: コントロール＆変換オプション -->
+            <section class="options-pane">
+                <div class="options-card">
+                    <h3>Convert To</h3>
+                    <div class="select-field">
+                        <select id="convert-target">
+                            <optgroup label="Data Formats (Free)">
+                                <option value="yaml" selected>YAML</option>
+                                <option value="xml">XML</option>
+                                <option value="csv">CSV (Array of Objects)</option>
+                            </optgroup>
+                            <optgroup label="Developer Types (Pro)">
+                                <option value="typescript">TypeScript Interfaces ⭐</option>
+                                <option value="go">Go Structs ⭐</option>
+                                <option value="java">Java Classes ⭐</option>
+                            </optgroup>
+                            <optgroup label="Utilities (Pro)">
+                                <option value="mock">Mock Data Generator ⭐</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <!-- Mock生成オプション（Mock選択時のみ表示） -->
+                    <div class="mock-options hidden" id="mock-config-group">
+                        <div class="select-field">
+                            <label for="mock-template">Mock Template</label>
+                            <select id="mock-template">
+                                <option value="users">User Profile List</option>
+                                <option value="products">Product Catalog</option>
+                                <option value="transactions">Transaction Logs</option>
+                            </select>
+                        </div>
+                        <div class="slider-field">
+                            <div class="slider-label">
+                                <span>Item Count</span>
+                                <span id="val-mock-count">10</span>
+                            </div>
+                            <input type="range" id="param-mock-count" min="1" max="100" value="10" step="1">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" id="btn-convert">🔄 Convert Data</button>
+                </div>
+            </section>
+
+            <!-- 右ペイン: 出力エディタ -->
+            <section class="editor-pane">
+                <div class="panel-header">
+                    <span class="panel-title">Output Result</span>
+                    <div class="panel-actions">
+                        <button class="action-btn" id="btn-copy">📋 Copy</button>
+                    </div>
+                </div>
+                <div class="editor-container">
+                    <textarea id="json-output" readonly placeholder="Output will appear here..."></textarea>
+                </div>
+            </section>
+        </main>
+
+        <!-- フッター -->
+        <footer class="app-footer">
+            <p>© 2026 T9S Studio. Data remains 100% on your device.</p>
+            <div class="footer-fund-info">
+                <span>💻 PC Fund: <strong>$185 / $1,200</strong></span>
+                <span class="divider">|</span>
+                <a href="#support" id="footer-support-link">☕ Support Project</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Proアンロックモーダル -->
+    <div class="modal" id="pro-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💎 Pro Features Unlock</h2>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>「TypeScript/Go/Java型定義の自動生成」</strong>および<strong>「テスト用Mockデータ自動生成」</strong>はPro版の限定機能です。
+                </p>
+                <div class="modal-fund-box">
+                    <h4>新しい開発PC基金へのご協力をお願いします</h4>
+                    <p>
+                        現在、開発者はより高速なコンパイルとオンデバイスAI開発を可能にする新しいPCの購入資金を募っています。もしツールが役に立ちましたら、Buy Me a Coffeeでの <strong>$3 以上</strong> のご支援、またはプロジェクトの応援をお願いします！
+                    </p>
+                    <div class="modal-action-links">
+                        <a href="https://www.buymeacoffee.com/" target="_blank" class="btn btn-primary btn-sm">☕ Buy Me a Coffee ($3~)</a>
+                    </div>
+                </div>
+                <div class="unlock-form">
+                    <label for="pro-key-input">アンロックキーを入力してください</label>
+                    <div class="input-group">
+                        <input type="text" id="pro-key-input" placeholder="T9S-XXXX-XXXX">
+                        <button class="btn btn-secondary" id="btn-submit-key">Apply Key</button>
+                    </div>
+                    <p class="error-msg hidden" id="key-error-msg">無効なキーです。もう一度お確かめください。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div class="toast hidden" id="toast-notification"></div>
+</body>
+</html>
