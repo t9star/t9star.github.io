@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
     // DOM要素の取得
     const regexPattern = document.getElementById('regex-pattern');
     const flagG = document.getElementById('flag-g');
@@ -39,7 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const toastNotification = document.getElementById('toast-notification');
 
     // アプリ状態
-    let isProUnlocked = localStorage.getItem('t9s_pro_unlocked') === 'true';
+    let isProUnlocked = false;
+    try {
+        isProUnlocked = localStorage.getItem('t9s_pro_unlocked') === 'true';
+    } catch (e) {
+        console.warn('localStorage access failed:', e);
+    }
     const PRO_KEY = 'T9S-PC-FUND-2026';
 
     // 1. Proアンロック状態の表示更新
@@ -120,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 let lastIndex = 0;
                 let match;
                 while ((match = regex.exec(text)) !== null) {
-                    // 無限ループ防止 (パターンが空文字マッチする可能性がある場合)
                     if (match.index === regex.lastIndex) {
                         regex.lastIndex++;
                     }
@@ -142,11 +146,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // レイヤードエディタの末尾の改行ズレを防止するためのハック
             highlightOverlay.innerHTML = html.replace(/\n$/, '\n\n');
             matchCountBadge.textContent = `${matchCount} match${matchCount !== 1 ? 'es' : ''}`;
             
-            // Pro解説をリアルタイムに更新
             if (isProUnlocked) {
                 updateExplainer(pattern);
             }
@@ -194,13 +196,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateExplainer(pattern) {
         if (!isProUnlocked) return;
 
-        // 既存の解説をクリア (ロックオーバーレイ以外を消去)
         const existingList = explainerContainer.querySelector('.explainer-list');
         if (existingList) existingList.remove();
 
         const explanations = [];
 
-        // 簡易正規表現パース＆解説エンジン
         let i = 0;
         while (i < pattern.length) {
             const char = pattern[i];
@@ -212,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 explanations.push({ code: '$', text: '文字列の末尾 (Line End) に一致します。' });
                 i++;
             } else if (char === '\\') {
-                // エスケープシーケンスの解析
                 const nextChar = pattern[i + 1];
                 if (nextChar === 'd') {
                     explanations.push({ code: '\\d', text: '数字 (0〜9 のいずれか1文字) に一致します。' });
@@ -227,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 i += 2;
             } else if (char === '[') {
-                // 文字クラスの解析
                 let inner = '';
                 let j = i + 1;
                 let isNegated = false;
@@ -273,7 +271,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     isNonCapturing = true;
                     j += 2;
                 }
-                // ネストは簡易無視して閉じ括弧を探す
                 let openCount = 1;
                 while (j < pattern.length && openCount > 0) {
                     if (pattern[j] === '(') openCount++;
@@ -293,11 +290,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 解説リストを表示
         const listEl = document.createElement('div');
         listEl.className = 'explainer-list';
 
-        // 表示するステップを最大6個に絞る (多すぎると重なるため)
         const displaySteps = explanations.slice(0, 6);
         displaySteps.forEach(item => {
             const itemEl = document.createElement('div');
@@ -334,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 explanation = '日本の郵便番号 (3桁の数字、ハイフン、4桁の数字) に文字列全体が完全に一致します。';
             } else if (prompt.includes('ip') || prompt.includes('アイピー')) {
                 pattern = '^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$';
-                explanation = 'IPv4 アドレス形式 (1〜3桁の数字とドットの3回繰り返し ＋ 1〜3桁の数字) に一致します。';
+                explanation = 'IPv4 アドレス形式 (1〜3桁 of 数字とドットの3回繰り返し ＋ 1〜3桁の数字) に一致します。';
             } else if (prompt.includes('数字') && prompt.includes('のみ')) {
                 pattern = '^\\d+$';
                 explanation = '1文字以上の半角数字のみで構成された文字列全体に一致します。';
@@ -342,9 +337,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 pattern = '^[a-zA-Z]+$';
                 explanation = '1文字以上の半角英字 (大文字・小文字) のみに一致します。';
             } else {
-                // 汎用フォールバック
                 pattern = '^' + prompt.replace(/[^a-zA-Z0-9]/g, '') + '$';
-                explanation = `入力されたプロンプトから生成された簡易パターンです。本格的な生成には OpenAI API の設定を推奨します。`;
+                explanation = `入力されたプロンプトから生成された簡易パターンです。`;
             }
 
             aiResultPattern.textContent = pattern;
@@ -385,7 +379,6 @@ document.addEventListener('DOMContentLoaded', () => {
     btnUnlockAi.addEventListener('click', openProModal);
     closeModalBtn.addEventListener('click', closeProModal);
     
-    // 背景クリックで閉じる
     proModal.addEventListener('click', (e) => {
         if (e.target === proModal) {
             closeProModal();
@@ -397,10 +390,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputKey = proKeyInput.value.trim().toUpperCase();
         if (inputKey === PRO_KEY) {
             isProUnlocked = true;
-            localStorage.setItem('t9s_pro_unlocked', 'true');
+            try {
+                localStorage.setItem('t9s_pro_unlocked', 'true');
+            } catch (e) {
+                console.warn('localStorage save failed:', e);
+            }
             updateProUI();
             closeProModal();
-            handleInput(); // UI更新してハイライト・解説描画
+            handleInput();
             showToast('🎉 Pro機能が正常にアンロックされました！');
         } else {
             keyErrorMsg.classList.remove('hidden');
@@ -409,4 +406,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初期生成
     handleInput();
-});
+}
+
+// 安全なDOM読み込み監視イニシャライザ
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}

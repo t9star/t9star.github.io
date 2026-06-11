@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
     // DOM要素の取得
     const shapeTabBtns = document.querySelectorAll('.tab-btn');
     const paramsBlob = document.getElementById('params-blob');
@@ -44,7 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // アプリ状態
     let currentShapeType = 'blob'; // 'blob' or 'wave'
-    let isProUnlocked = localStorage.getItem('t9s_pro_unlocked') === 'true';
+    let isProUnlocked = false;
+    try {
+        isProUnlocked = localStorage.getItem('t9s_pro_unlocked') === 'true';
+    } catch (e) {
+        console.warn('localStorage access failed:', e);
+    }
     const PRO_KEY = 'T9S-PC-FUND-2026';
 
     // 1. Proアンロック状態の表示更新
@@ -248,7 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 16進数カラーに透過度を追加・調整するヘルパー
     function adjustColorAlpha(hex, alpha) {
-        // グラデーション定義が直接入ってきた場合などの簡易フォールバック
         if (!hex.startsWith('#')) return hex;
         const r = parseInt(hex.slice(1, 3), 16);
         const g = parseInt(hex.slice(3, 5), 16);
@@ -265,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         for (let i = 0; i < numPoints; i++) {
             const angle = (i / numPoints) * Math.PI * 2;
-            // ランダムオフセット
             const offset = (Math.random() - 0.5) * maxOffset;
             const r = baseRadius + offset;
             
@@ -283,7 +286,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const step = size / (complexity - 1);
         const baseY = size - height;
 
-        // 開始位置 (左端)
         points.push({ x: 0, y: baseY + (Math.random() - 0.5) * 60 });
 
         for (let i = 1; i < complexity - 1; i++) {
@@ -292,10 +294,8 @@ document.addEventListener('DOMContentLoaded', () => {
             points.push({ x, y });
         }
 
-        // 終了位置 (右端)
         points.push({ x: size, y: baseY + (Math.random() - 0.5) * 60 });
 
-        // 波形を閉じるため、右下を経由して左下に戻るパスを追加
         let path = getBezierCurvePath(points, false);
         path += ` L ${size} ${size} L 0 ${size} Z`;
         return path;
@@ -315,7 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const p2 = points[(i + 1) % len];
                 const p3 = points[(i + 2) % len];
 
-                // 制御点 (Catmull-Rom スプラインの補正)
                 const cp1x = p1.x + (p2.x - p0.x) * 0.15;
                 const cp1y = p1.y + (p2.y - p0.y) * 0.15;
                 const cp2x = p2.x - (p3.x - p1.x) * 0.15;
@@ -324,7 +323,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 path += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
             }
         } else {
-            // 開いたパス (Wave用)
             for (let i = 0; i < len - 1; i++) {
                 const p0 = i > 0 ? points[i - 1] : points[i];
                 const p1 = points[i];
@@ -346,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnCopyCode.addEventListener('click', () => {
         const svgCode = svgPreviewContainer.innerHTML;
         navigator.clipboard.writeText(svgCode).then(() => {
-            showToast('📋 SVG Code をクリップボードにコピーしました！');
+            showToast('📋 SVG Code をコピーしました！');
         }).catch(() => {
             showToast('❌ コピーに失敗しました。');
         });
@@ -378,11 +376,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const image = new Image();
         image.onload = () => {
             const canvas = document.createElement('canvas');
-            canvas.width = 800; // 高解像度出力用
+            canvas.width = 800;
             canvas.height = 800;
             const context = canvas.getContext('2d');
-            
-            // 背景透過で描画
             context.clearRect(0, 0, 800, 800);
             context.drawImage(image, 0, 0, 800, 800);
             
@@ -420,7 +416,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeModalBtn.addEventListener('click', closeProModal);
     
-    // 背景クリックで閉じる
     proModal.addEventListener('click', (e) => {
         if (e.target === proModal) {
             closeProModal();
@@ -432,10 +427,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputKey = proKeyInput.value.trim().toUpperCase();
         if (inputKey === PRO_KEY) {
             isProUnlocked = true;
-            localStorage.setItem('t9s_pro_unlocked', 'true');
+            try {
+                localStorage.setItem('t9s_pro_unlocked', 'true');
+            } catch (e) {
+                console.warn('localStorage save failed:', e);
+            }
             updateProUI();
             closeProModal();
-            generateShape(); // Pro機能適用して再描画
+            generateShape();
             showToast('🎉 Pro機能が正常にアンロックされました！');
         } else {
             keyErrorMsg.classList.remove('hidden');
@@ -444,4 +443,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初期生成
     generateShape();
-});
+}
+
+// 安全なDOM読み込み監視イニシャライザ
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}

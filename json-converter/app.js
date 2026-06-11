@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function init() {
     // DOM要素の取得
     const jsonInput = document.getElementById('json-input');
     const jsonOutput = document.getElementById('json-output');
@@ -29,7 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const toastNotification = document.getElementById('toast-notification');
 
     // アプリ状態
-    let isProUnlocked = localStorage.getItem('t9s_pro_unlocked') === 'true';
+    let isProUnlocked = false;
+    try {
+        isProUnlocked = localStorage.getItem('t9s_pro_unlocked') === 'true';
+    } catch (e) {
+        console.warn('localStorage access failed:', e);
+    }
     const PRO_KEY = 'T9S-PC-FUND-2026';
 
     // 1. Proアンロック状態の表示更新
@@ -236,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return 'Error: Input must be an array of objects to convert to CSV.\nExample: [ {"name": "Alice", "age": 20}, {"name": "Bob", "age": 25} ]';
         }
         
-        // オブジェクトの平坦化はせず、第1階層のキーをカラムとする
         const keys = Object.keys(arr[0]);
         const header = keys.join(',');
         const rows = arr.map(obj => {
@@ -305,7 +309,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         for (const key of Object.keys(obj)) {
             const value = obj[key];
-            // キャメルケース化してGoのフィールド名にする
             const goKey = capitalize(key).replace(/_([a-z0-9])/g, (g) => g[1].toUpperCase());
             let goType = '';
             
@@ -373,7 +376,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             fields += `    private ${javaType} ${javaKey};\n`;
             
-            // Getter & Setter
             const capKey = capitalize(javaKey);
             gettersSetters += `
     public ${javaType} get${capKey}() {
@@ -434,7 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     rating: parseFloat((Math.random() * 1.5 + 3.5).toFixed(1))
                 });
             } else {
-                // transactions
                 data.push({
                     transactionId: `TXN-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
                     userId: 1000 + Math.floor(Math.random() * 50),
@@ -473,7 +474,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeModalBtn.addEventListener('click', closeProModal);
     
-    // 背景クリックで閉じる
     proModal.addEventListener('click', (e) => {
         if (e.target === proModal) {
             closeProModal();
@@ -485,7 +485,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputKey = proKeyInput.value.trim().toUpperCase();
         if (inputKey === PRO_KEY) {
             isProUnlocked = true;
-            localStorage.setItem('t9s_pro_unlocked', 'true');
+            try {
+                localStorage.setItem('t9s_pro_unlocked', 'true');
+            } catch (e) {
+                console.warn('localStorage save failed:', e);
+            }
             updateProUI();
             closeProModal();
             showToast('🎉 Pro機能が正常にアンロックされました！');
@@ -493,4 +497,11 @@ document.addEventListener('DOMContentLoaded', () => {
             keyErrorMsg.classList.remove('hidden');
         }
     });
-});
+}
+
+// 安全なDOM読み込み監視イニシャライザ
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
