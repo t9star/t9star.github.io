@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T9S Studio - ブラウザ完結型ツール＆モバイルアプリ</title>
+    <meta name="description" content="T9S Studioが開発する、プライバシー第一で超高速に動作するWebユーティリティおよびモバイルアプリのポートフォリオハブです。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 背景アニメーション装飾 -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <div class="portal-container">
+        <!-- ヘッダー -->
+        <header class="portal-header">
+            <div class="logo-group">
+                <span class="portal-logo-icon">🚀</span>
+                <div class="portal-logo-text">
+                    <h1>T9S Studio</h1>
+                    <p>High-Performance, Privacy-First Utilities</p>
+                </div>
+            </div>
+            <div class="header-nav">
+                <a href="#web-tools" class="nav-link">Web Tools</a>
+                <a href="#mobile-apps" class="nav-link">Mobile Apps</a>
+                <a href="#support-section" class="btn btn-secondary btn-sm" id="nav-support-btn">☕ Support Project</a>
+            </div>
+        </header>
+
+        <!-- ヒーローセクション -->
+        <section class="hero-section">
+            <h2 class="hero-title">余計なサーバー処理は不要。<br><span class="gradient-text">あなたのデバイス上で完結。</span></h2>
+            <p class="hero-subtitle">
+                T9S Studio のツールは、データを外部のサーバーに送信せず、すべてブラウザ内（WebAssembly/IndexedDB）またはローカルデバイス上で動作します。安全、超高速、そして完全無料。
+            </p>
+        </section>
+
+        <!-- PC基金＆寄付ウィジェット -->
+        <section class="fund-section" id="support-section">
+            <div class="fund-card">
+                <div class="fund-info">
+                    <span class="fund-badge">🎯 PROJECT GOAL</span>
+                    <h3>新しい開発用PC基金 (High-Spec Dev Workstation Fund)</h3>
+                    <p>
+                        現在、より重いコンパイル処理やオンデバイスAI開発を快適に行うための「新しい開発用PC」の購入資金を募っています。もしツールが役に立ったと感じたら、開発者にコーヒーを奢っていただけると非常に嬉しいです！
+                    </p>
+                    <div class="fund-progress-container">
+                        <div class="fund-progress-header">
+                            <span class="progress-raised">支援額: <strong>$185</strong> (約28,000円)</span>
+                            <span class="progress-target">目標: <strong>$1,200</strong></span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" id="pc-fund-progress" style="width: 15.4%;">
+                                <span class="progress-percent">15%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fund-actions">
+                    <a href="https://www.buymeacoffee.com/t9star" target="_blank" class="btn btn-primary btn-lg" id="fund-bmc-btn">
+                        <span class="btn-icon">☕</span> Buy Me a Coffee
+                    </a>
+                    <a href="https://ko-fi.com/t9star" target="_blank" class="btn btn-outline btn-lg" id="fund-kofi-btn">
+                        <span class="btn-icon">❤️</span> Ko-fi で支援する
+                    </a>
+                    <p class="unlock-note">※ $3以上の支援で、ツールの「Pro版アンロックキー」を入手できます！</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- メインセクション：Webツール -->
+        <section class="section-container" id="web-tools">
+            <h3 class="section-title">Web Utilities <span class="section-subtitle">(ブラウザ完結型Webツール)</span></h3>
+            <div class="card-grid">
+                <!-- Mockup Studio -->
+                <article class="app-card">
+                    <div class="card-icon-wrapper">
+                        <span class="card-icon">📸</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>Mockup Studio</h4>
+                            <span class="badge badge-accent">WebAssembly</span>
+                        </div>
+                        <p class="card-desc">スクリーンショットをアップロードするだけで、iPhoneやMacBookなどの洗練された3D風デバイスフレームに合成できるモックアップジェネレーター。</p>
+                        <div class="card-tags">
+                            <span class="tag">ブラウザ処理</span>
+                            <span class="tag">PNG出力</span>
+                            <span class="tag">Pro版キー対応</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="./mockup-studio/" class="btn btn-primary btn-block" id="launch-mockup-btn">ツールを起動する</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Git Visualizer -->
+                <article class="app-card">
+                    <div class="card-icon-wrapper">
+                        <span class="card-icon">🌲</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>Git Visualizer</h4>
+                            <span class="badge badge-primary">SVG Interactive</span>
+                        </div>
+                        <p class="card-desc">インタラクティブにGitコマンドを打ち込み、ブランチツリーやコミットグラフがどのように動くかをビジュアルで学習できるシミュレータ。</p>
+                        <div class="card-tags">
+                            <span class="tag">Git学習</span>
+                            <span class="tag">インタラクティブ</span>
+                            <span class="tag">Sandbox</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="./git-visualizer/" class="btn btn-primary btn-block" id="launch-git-btn">ツールを起動する</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- OSS Alternatives -->
+                <article class="app-card">
+                    <div class="card-icon-wrapper">
+                        <span class="card-icon">📋</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>OSS Alternatives</h4>
+                            <span class="badge badge-success">GitHub API</span>
+                        </div>
+                        <p class="card-desc">NotionやSlack、Firebaseなどの主要SaaSの代替となる、セルフホスト可能な人気オープンソースソフトウェア(OSS)の比較ディレクトリ。</p>
+                        <div class="card-tags">
+                            <span class="tag">OSSデータベース</span>
+                            <span class="tag">スター数比較</span>
+                            <span class="tag">インフラ紹介</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="./oss-alternatives/" class="btn btn-primary btn-block" id="launch-oss-btn">ツールを起動する</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- メインセクション：モバイルアプリ -->
+        <section class="section-container" id="mobile-apps">
+            <h3 class="section-title">Mobile Applications <span class="section-subtitle">(Androidネイティブアプリ)</span></h3>
+            <div class="card-grid">
+                <!-- 禅禅 (Zen Zen) -->
+                <article class="app-card">
+                    <div class="card-image-header" style="background: linear-gradient(135deg, #1f2937, #111827);">
+                        <span class="app-logo-large">🧘</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>禅禅 (Zen Zen)</h4>
+                            <span class="badge badge-info">Android</span>
+                        </div>
+                        <p class="card-desc">泡プチプチ、枯山水シミュレーション、リアルな風とチャイムなど、五感で楽しむオンデバイス完結型リラクゼーションアプリ。</p>
+                        <div class="card-tags">
+                            <span class="tag">Jetpack Compose</span>
+                            <span class="tag">触覚フィードバック</span>
+                            <span class="tag">AdMob搭載</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-secondary btn-block disabled" id="download-zen-btn" onclick="alert('Google Playストア申請中です！まもなく公開されます。')">まもなく公開 (Google Play)</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- コレクター目録 (Collector Catalogger) -->
+                <article class="app-card">
+                    <div class="card-image-header" style="background: linear-gradient(135deg, #1e1b4b, #311042);">
+                        <span class="app-logo-large">📚</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>コレクター目録</h4>
+                            <span class="badge badge-info">Android</span>
+                        </div>
+                        <p class="card-desc">本やゲームのバーコードをカメラで高速スキャンし、ローカル本棚に一括整理。CSVインポートや美しい本棚画像のSNS共有機能を搭載。</p>
+                        <div class="card-tags">
+                            <span class="tag">Google ML Kit</span>
+                            <span class="tag">Room (SQLite)</span>
+                            <span class="tag">CSV/SNS共有</span>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-secondary btn-block disabled" id="download-collector-btn" onclick="alert('Google Playストア申請準備中！まもなく公開されます。')">まもなく公開 (Google Play)</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- フッター -->
+        <footer class="portal-footer">
+            <p>&copy; 2026 T9S Studio. All rights reserved. Built with pride using vanilla client-side technologies.</p>
+            <p class="footer-privacy">すべてのデータはユーザーのローカル環境でのみ安全に保存・処理されます。サーバーへの自動送信はありません。</p>
+        </footer>
+    </div>
+</body>
+</html>

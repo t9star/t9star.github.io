@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mockup Studio - 美しいスクリーンショットモックアップ作成ツール</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- ヘッダー -->
+        <header class="app-header">
+            <div class="logo-area">
+                <a href="../" class="btn-back" title="ポータルに戻る" id="back-to-portal-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </a>
+                <span class="logo-icon">📸</span>
+                <div class="logo-text">
+                    <h1>Mockup Studio</h1>
+                    <p>ローカル完結型・超高速デバイスモックアップ作成ツール</p>
+                </div>
+            </div>
+            <div class="actions-area">
+                <button id="download-btn" class="btn btn-primary">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                    </svg>
+                    画像を書き出す (PNG)
+                </button>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main class="app-body">
+            <!-- プレビューエリア -->
+            <section class="preview-section" id="drop-zone">
+                <div class="preview-container">
+                    <canvas id="mockup-canvas"></canvas>
+                    
+                    <!-- アップロードプレースホルダー -->
+                    <div class="upload-placeholder" id="upload-prompt">
+                        <div class="upload-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <polyline points="21 15 16 10 5 21"/>
+                            </svg>
+                        </div>
+                        <h3>スクリーンショットをアップロード</h3>
+                        <p>ここに画像をドラッグ＆ドロップするか、クリックしてファイルを選択</p>
+                        <span class="file-note">※画像データはサーバーに送信されず、ブラウザ内でのみ安全に処理されます。</span>
+                        <input type="file" id="file-input" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+            </section>
+
+            <!-- コントロールパネル -->
+            <aside class="control-panel">
+                <div class="panel-section">
+                    <h2>デバイス設定</h2>
+                    
+                    <div class="control-group">
+                        <label>フレームタイプ</label>
+                        <div class="toggle-buttons" id="frame-type-group">
+                            <button class="toggle-btn active" data-value="browser">Browser</button>
+                            <button class="toggle-btn" data-value="iphone" data-pro="true">iPhone ⭐</button>
+                            <button class="toggle-btn" data-value="macbook" data-pro="true">MacBook ⭐</button>
+                            <button class="toggle-btn" data-value="none">なし</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group" id="device-color-container" style="display: none;">
+                        <label>デバイスカラー</label>
+                        <div class="toggle-buttons" id="device-color-group">
+                            <button class="toggle-btn active" data-value="#1e293b">Space Gray</button>
+                            <button class="toggle-btn" data-value="#e2e8f0">Silver</button>
+                            <button class="toggle-btn" data-value="#fef08a">Gold</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>アスペクト比</label>
+                        <div class="toggle-buttons" id="ratio-group">
+                            <button class="toggle-btn active" data-value="16-9">16:9 (X)</button>
+                            <button class="toggle-btn" data-value="4-3">4:3</button>
+                            <button class="toggle-btn" data-value="1-1">1:1</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2>スタイル設定</h2>
+
+                    <div class="control-group">
+                        <label>背景デザイン</label>
+                        <div class="bg-presets">
+                            <button class="bg-preset active" data-type="gradient" data-value="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" style="background: linear-gradient(135deg, #667eea, #764ba2);"></button>
+                            <button class="bg-preset" data-type="gradient" data-value="linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%)" style="background: linear-gradient(135deg, #ff9a9e, #fecfef);"></button>
+                            <button class="bg-preset" data-type="gradient" data-value="linear-gradient(135deg, #f093fb 0%, #f5576c 100%)" style="background: linear-gradient(135deg, #f093fb, #f5576c);"></button>
+                            <button class="bg-preset" data-type="gradient" data-value="linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)" style="background: linear-gradient(135deg, #4facfe, #00f2fe);"></button>
+                            <button class="bg-preset" data-type="gradient" data-value="linear-gradient(135deg, #0ba360 0%, #3cba92 100%)" style="background: linear-gradient(135deg, #0ba360, #3cba92);"></button>
+                            <button class="bg-preset" data-type="gradient" data-value="linear-gradient(135deg, #434343 0%, #000000 100%)" style="background: linear-gradient(135deg, #434343, #000000);"></button>
+                            <button class="bg-preset" data-type="custom" id="custom-color-indicator" style="background: #ffffff; border: 2px dashed #ccc;"></button>
+                        </div>
+                        <input type="color" id="custom-color-picker" style="display: none;" value="#ffffff">
+                    </div>
+
+                    <div class="control-group">
+                        <div class="slider-header">
+                            <label for="padding-slider">余白 (Padding)</label>
+                            <span class="slider-value" id="padding-value">60px</span>
+                        </div>
+                        <input type="range" id="padding-slider" min="20" max="150" value="60">
+                    </div>
+
+                    <div class="control-group">
+                        <div class="slider-header">
+                            <label for="radius-slider">角の丸み (Radius)</label>
+                            <span class="slider-value" id="radius-value">12px</span>
+                        </div>
+                        <input type="range" id="radius-slider" min="0" max="40" value="12">
+                    </div>
+
+                    <div class="control-group">
+                        <div class="slider-header">
+                            <label for="shadow-slider">影の強さ (Shadow)</label>
+                            <span class="slider-value" id="shadow-value">30px</span>
+                        </div>
+                        <input type="range" id="shadow-slider" min="0" max="80" value="30">
+                    </div>
+
+                    <div class="control-group">
+                        <div class="slider-header">
+                            <label for="tilt-slider">傾き (Angle/Tilt)</label>
+                            <span class="slider-value" id="tilt-value">0°</span>
+                        </div>
+                        <input type="range" id="tilt-slider" min="-15" max="15" value="0">
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h2>テキスト設定</h2>
+                    <div class="control-group">
+                        <label>キャッチコピー</label>
+                        <input type="text" id="caption-input" placeholder="例: Awesome Web App" style="width: 100%; padding: 8px 12px; background: var(--bg-dark); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); outline: none; margin-bottom: 12px;">
+                        
+                        <div class="slider-header">
+                            <label for="caption-size-slider">文字サイズ</label>
+                            <span class="slider-value" id="caption-size-value">36px</span>
+                        </div>
+                        <input type="range" id="caption-size-slider" min="20" max="75" value="36" style="margin-bottom: 12px;">
+                        
+                        <label>文字の色</label>
+                        <input type="color" id="caption-color-picker" value="#ffffff" style="width: 100%; height: 32px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); background: transparent; cursor: pointer;">
+                    </div>
+                </div>
+
+                <div class="panel-section donation-sidebar-card">
+                    <h2>☕ Developer Support</h2>
+                    <div class="sidebar-support-content">
+                        <p>ツールの開発（新しい開発用PC基金）を支援して、すべてのプレミアムフレームをアンロックしませんか？</p>
+                        <button class="btn btn-secondary btn-block" id="sidebar-unlock-trigger">🔑 キーを入力してアンロック</button>
+                    </div>
+                </div>
+                
+                <!-- AdSenseプレースホルダー広告枠 -->
+                <div class="adsense-placeholder-sidebar">
+                    <span class="adsense-label">Sponsor Ads</span>
+                    <div class="ads-box">
+                        <!-- ここにGoogle AdSenseコードを挿入できます -->
+                        <p>Ad Slot</p>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Proアンロックモーダル -->
+    <div id="pro-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>⭐ Pro機能のアンロック</h2>
+                <button class="btn-close" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-promo-text">
+                    iPhone および MacBook などのプレミアムなデバイスフレームはPro限定機能です。<br>
+                    支援金は開発者の「新しい開発用PC」の購入資金として100%活用されます。
+                </p>
+                <div class="modal-features">
+                    <div class="feat-item">✨ <strong>すべてのデバイスフレーム</strong> (iPhone, MacBookなど)</div>
+                    <div class="feat-item">⚡ <strong>ローカル高速レンダリング</strong> (サーバー送信なしで安全)</div>
+                    <div class="feat-item">🎨 <strong>今後のアップデート</strong> (新しい3D背景やフレームの追加)</div>
+                </div>
+                <div class="modal-support-links">
+                    <a href="https://www.buymeacoffee.com/t9star" target="_blank" class="btn btn-primary btn-block">
+                        ☕ Buy Me a Coffee で支援する ($3〜)
+                    </a>
+                    <a href="https://ko-fi.com/t9star" target="_blank" class="btn btn-outline btn-block">
+                        ❤️ Ko-fi で支援する
+                    </a>
+                </div>
+                <div class="modal-key-section">
+                    <label for="pro-key-input">アンロックキーを入力</label>
+                    <div class="key-input-row">
+                        <input type="text" id="pro-key-input" placeholder="例: T9S-XXXX-XXXX-XXXX" autocomplete="off">
+                        <button class="btn btn-primary" id="pro-verify-btn">適用</button>
+                    </div>
+                    <span class="key-help">※支援完了画面またはメッセージで配布されたキーを入力してください。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div id="toast" class="toast">メッセージ</div>
+
+    <script src="app.js"></script>
+</body>
+</html>

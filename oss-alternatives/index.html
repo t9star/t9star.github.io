@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaaS to OSS Alternatives - 商用SaaSのオープンソース代替サービス集</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- ナビゲーションバー -->
+        <header class="app-header">
+            <div class="logo-area">
+                <a href="../" class="btn-back" title="ポータルに戻る" id="back-to-portal-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </a>
+                <span class="logo-icon">✨</span>
+                <div class="logo-text">
+                    <h1>SaaS to OSS</h1>
+                    <p>プライバシー第一、自己ホスト可能なオープンソース代替ソフトウェア</p>
+                </div>
+            </div>
+            <div class="actions-area">
+                <a href="https://github.com" target="_blank" class="btn btn-secondary">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                    </svg>
+                    GitHubで提案する
+                </a>
+            </div>
+        </header>
+
+        <!-- メインコンテンツ -->
+        <main class="app-body">
+            <!-- ヒーローセクション -->
+            <section class="hero-section">
+                <h2>商用SaaSを、オープンソースに置き換えよう。</h2>
+                <p>Notion, Slack, Firebaseなどの強力なオープンソース代替プロジェクトをまとめました。セルフホストして完全なデータ所有権を取り戻しましょう。</p>
+                
+                <!-- 検索・フィルタリングバー -->
+                <div class="search-filter-container">
+                    <div class="search-box">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                        <input type="text" id="search-input" placeholder="SaaS名、オープンソース名、タグで検索...">
+                    </div>
+                </div>
+            </section>
+
+            <!-- カテゴリタブ -->
+            <section class="categories-section">
+                <div class="category-tabs" id="category-tabs">
+                    <button class="tab-btn active" data-category="all">すべて</button>
+                    <button class="tab-btn" data-category="documents">📝 ドキュメント / Wiki</button>
+                    <button class="tab-btn" data-category="communication">💬 チャット / 通信</button>
+                    <button class="tab-btn" data-category="developer">🛠️ 開発者ツール</button>
+                    <button class="tab-btn" data-category="database">📊 データベース / Eコマース</button>
+                    <button class="tab-btn" data-category="management">📋 タスク / CRM</button>
+                </div>
+            </section>
+
+            <!-- グリッドセクション -->
+            <section class="grid-section">
+                <div class="saas-grid" id="saas-grid">
+                    <!-- JavaScriptでカードが動的に挿入されます -->
+                </div>
+            </section>
+
+            <!-- サポートセクション -->
+            <section class="support-footer-section">
+                <div class="donation-card-footer">
+                    <h4>☕ T9S Studio を応援してツールをアンロック</h4>
+                    <p>このデータベースが役に立ちましたか？新しい開発用PC基金を支援して、開発者にコーヒーを奢っていただけると励みになります！</p>
+                    <a href="https://www.buymeacoffee.com/t9star" target="_blank" class="btn btn-primary">
+                        ☕ Buy Me a Coffee ($3〜)
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <!-- 詳細情報モーダル -->
+        <div class="modal" id="details-modal">
+            <div class="modal-content">
+                <button class="close-btn" id="modal-close-btn">&times;</button>
+                <div class="modal-body" id="modal-body">
+                    <!-- 動的挿入 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div id="toast" class="toast">メッセージ</div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

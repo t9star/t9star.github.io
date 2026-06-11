@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git Branch Visual Simulator - インタラクティブGit視覚化シミュレータ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- ヘッダー -->
+        <header class="app-header">
+            <div class="logo-area">
+                <a href="../" class="btn-back" title="ポータルに戻る" id="back-to-portal-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </svg>
+                </a>
+                <span class="logo-icon">🌲</span>
+                <div class="logo-text">
+                    <h1>Git Visualizer</h1>
+                    <p>コマンド入力でブランチツリーを視覚的に学ぶサンドボックス</p>
+                </div>
+            </div>
+            <div class="actions-area">
+                <button id="reset-btn" class="btn btn-secondary">初期化</button>
+            </div>
+        </header>
+
+        <!-- メイン画面 -->
+        <main class="app-body">
+            <!-- サイドバー：シナリオ選択 ＆ コマンドリファレンス -->
+            <aside class="sidebar">
+                <div class="sidebar-section">
+                    <h2>ガイドレッスン</h2>
+                    <ul class="scenario-list">
+                        <li class="scenario-item active" data-scenario="basic">
+                            <h3>1. 基本的なコミット</h3>
+                            <p>commitコマンドで歴史を作ります。</p>
+                        </li>
+                        <li class="scenario-item" data-scenario="branch">
+                            <h3>2. ブランチの作成</h3>
+                            <p>checkoutで新ブランチを作り分岐します。</p>
+                        </li>
+                        <li class="scenario-item" data-scenario="merge">
+                            <h3>3. マージ (Merge)</h3>
+                            <p>mainブランチに開発内容を統合します。</p>
+                        </li>
+                        <li class="scenario-item" data-scenario="rebase" data-pro="true">
+                            <h3>4. リベース (Rebase) ⭐</h3>
+                            <p>分岐元の履歴を最新状態の先に再配置します。</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-section">
+                    <h2>コマンドリファレンス</h2>
+                    <div class="cmd-ref-grid">
+                        <div class="cmd-ref-item" data-cmd="git commit"><code>git commit</code></div>
+                        <div class="cmd-ref-item" data-cmd="git branch "><code>git branch [名]</code></div>
+                        <div class="cmd-ref-item" data-cmd="git checkout "><code>git checkout [名]</code></div>
+                        <div class="cmd-ref-item" data-cmd="git merge "><code>git merge [名]</code></div>
+                        <div class="cmd-ref-item" data-cmd="git rebase "><code>git rebase [名]</code></div>
+                    </div>
+                    <span class="ref-note">※コマンドをクリックすると入力欄に入力されます。</span>
+                </div>
+
+                <div class="sidebar-section donation-sidebar-card">
+                    <h2>☕ Developer Support</h2>
+                    <div class="sidebar-support-content">
+                        <p>ツールの開発（新しい開発用PC基金）を支援して、アドバンスドレッスンをアンロックしませんか？</p>
+                        <button class="btn btn-secondary btn-block" id="sidebar-unlock-trigger">🔑 キーを入力してアンロック</button>
+                    </div>
+                </div>
+                
+                <!-- AdSenseプレースホルダー広告枠 -->
+                <div class="adsense-placeholder-sidebar">
+                    <span class="adsense-label">Sponsor Ads</span>
+                    <div class="ads-box">
+                        <p>Ad Slot</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- メインコンテンツ領域（描画＋ターミナル） -->
+            <section class="main-content">
+                <!-- 視覚化エリア -->
+                <div class="visualizer-panel">
+                    <div class="visualizer-header">
+                        <h3>コミットグラフ (Git Tree)</h3>
+                        <div class="legend">
+                            <span class="legend-item"><span class="legend-dot dot-main"></span>main</span>
+                            <span class="legend-item"><span class="legend-dot dot-feature"></span>feature</span>
+                            <span class="legend-item"><span class="legend-dot dot-hotfix"></span>hotfix</span>
+                        </div>
+                    </div>
+                    <div class="canvas-container">
+                        <svg id="git-svg" width="100%" height="100%">
+                            <!-- SVG定義（矢印マーカーなど） -->
+                            <defs>
+                                <marker id="arrow" viewBox="0 0 10 10" refX="24" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569" />
+                                </marker>
+                            </defs>
+                            <!-- 動的描画エリア -->
+                            <g id="git-links"></g>
+                            <g id="git-nodes"></g>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- ターミナルパネル -->
+                <div class="terminal-panel" id="terminal-click-area">
+                    <div class="terminal-header">
+                        <div class="terminal-dots">
+                            <span class="t-dot t-red"></span>
+                            <span class="t-dot t-yellow"></span>
+                            <span class="t-dot t-green"></span>
+                        </div>
+                        <span class="terminal-title">git-terminal - bash</span>
+                    </div>
+                    <div class="terminal-body" id="terminal-body">
+                        <div class="terminal-log">
+                            <div class="log-row system">Welcome to Git Visualizer Sandbox!</div>
+                            <div class="log-row system">リファレンスからコマンドを選択するか、直接キーボード入力してください。</div>
+                        </div>
+                        <div class="input-line">
+                            <span class="prompt">git-terminal $</span>
+                            <input type="text" id="terminal-input" autocomplete="off" autofocus>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Proアンロックモーダル -->
+    <div id="pro-modal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>⭐ Proレッスンのアンロック</h2>
+                <button class="btn-close" id="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-promo-text">
+                    「4. リベース (Rebase)」などの高度なGitレッスンはPro限定機能です。<br>
+                    支援金は開発者の「新しい開発用PC」の購入資金として100%活用されます。
+                </p>
+                <div class="modal-features">
+                    <div class="feat-item">🌲 <strong>高度なGitレッスン</strong> (Rebaseシミュレーションなど)</div>
+                    <div class="feat-item">⚡ <strong>ローカル完結学習</strong> (外部通信をせず超高速動作)</div>
+                    <div class="feat-item">📖 <strong>アソシエイト推薦書籍リンク</strong> (さらに深く学ぶための推薦枠)</div>
+                </div>
+                <div class="modal-support-links">
+                    <a href="https://www.buymeacoffee.com/t9star" target="_blank" class="btn btn-primary btn-block">
+                        ☕ Buy Me a Coffee で支援する ($3〜)
+                    </a>
+                    <a href="https://ko-fi.com/t9star" target="_blank" class="btn btn-outline btn-block">
+                        ❤️ Ko-fi で支援する
+                    </a>
+                </div>
+                <div class="modal-key-section">
+                    <label for="pro-key-input">アンロックキーを入力</label>
+                    <div class="key-input-row">
+                        <input type="text" id="pro-key-input" placeholder="例: T9S-XXXX-XXXX-XXXX" autocomplete="off">
+                        <button class="btn btn-primary" id="pro-verify-btn">適用</button>
+                    </div>
+                    <span class="key-help">※支援完了画面またはメッセージで配布されたキーを入力してください。</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div id="toast" class="toast">メッセージ</div>
+
+    <script src="app.js"></script>
+</body>
+</html>
