@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web SFX & Sound Generator - T9S Studio</title>
+    <meta name="description" content="ブラウザ上で動作する高機能効果音（SE）ジェネレーター。シンセサイザー波形やマイク録音をサンプリングし、ピッチ、エコー、フィルター、ディストーションを自由に加工してWAV書き出しできます。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="app-container">
+        <!-- ヘッダー -->
+        <header class="app-header">
+            <div class="header-left">
+                <a href="../index.html" class="back-link">
+                    <span class="icon">←</span> Portal
+                </a>
+                <span class="divider">|</span>
+                <span class="logo-icon">🔊</span>
+                <div class="title-group">
+                    <h1>Web SFX & Sound Generator</h1>
+                    <p>Design retro game sounds and vocal samples on your device</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-secondary btn-sm" id="pro-status-btn">💎 Get Pro</button>
+            </div>
+        </header>
+
+        <!-- メインエリア -->
+        <main class="app-main">
+            <!-- コントロールパネル (左側) -->
+            <section class="control-panel">
+                <!-- 音源ソース選択 -->
+                <div class="control-group">
+                    <h3>Sound Source</h3>
+                    <div class="tabs">
+                        <button class="tab-btn active" data-source="synth">Synthesizer (シンセ)</button>
+                        <button class="tab-btn" data-source="mic">Mic Sampling (マイク)</button>
+                    </div>
+                </div>
+
+                <!-- シンセサイザー音源パラメータ -->
+                <div class="control-group" id="source-synth-group">
+                    <h3>Synth Settings</h3>
+                    <div class="select-field">
+                        <label for="param-waveform">Waveform (波形)</label>
+                        <select id="param-waveform">
+                            <option value="sine">Sine (正弦波 - 澄んだ音)</option>
+                            <option value="square" selected>Square (矩形波 - レトロファミコン音)</option>
+                            <option value="triangle">Triangle (三角波 - ファミコン低音・木琴風)</option>
+                            <option value="sawtooth">Sawtooth (のこぎり波 - 鋭く力強い音)</option>
+                        </select>
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Base Frequency (基本周波数)</span>
+                            <span class="val" id="val-frequency">440 Hz</span>
+                        </div>
+                        <input type="range" id="param-frequency" min="60" max="2000" value="440" step="10">
+                    </div>
+                    
+                    <!-- ADSR音量エンベロープ -->
+                    <div class="grid-2-col">
+                        <div class="slider-field">
+                            <div class="slider-label">
+                                <span>Attack (立ち上がり)</span>
+                                <span class="val" id="val-adsr-a">0.01s</span>
+                            </div>
+                            <input type="range" id="param-adsr-a" min="0" max="1" value="0.01" step="0.01">
+                        </div>
+                        <div class="slider-field">
+                            <div class="slider-label">
+                                <span>Decay (減衰)</span>
+                                <span class="val" id="val-adsr-d">0.15s</span>
+                            </div>
+                            <input type="range" id="param-adsr-d" min="0.01" max="1" value="0.15" step="0.01">
+                        </div>
+                    </div>
+                    <div class="grid-2-col">
+                        <div class="slider-field">
+                            <div class="slider-label">
+                                <span>Sustain (保持レベル)</span>
+                                <span class="val" id="val-adsr-s">30%</span>
+                            </div>
+                            <input type="range" id="param-adsr-s" min="0" max="100" value="30" step="5">
+                        </div>
+                        <div class="slider-field">
+                            <div class="slider-label">
+                                <span>Release (余韻)</span>
+                                <span class="val" id="val-adsr-r">0.2s</span>
+                            </div>
+                            <input type="range" id="param-adsr-r" min="0.01" max="2" value="0.2" step="0.05">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- マイクサンプリング音源パラメータ -->
+                <div class="control-group hidden" id="source-mic-group">
+                    <h3>Microphone Sampler</h3>
+                    <p class="desc-text">マイクから音声を録音し、SEの素材として加工します。</p>
+                    <div class="mic-controls">
+                        <button class="btn btn-secondary" id="btn-record-mic">⏺️ Record (最大10秒)</button>
+                        <span class="record-timer" id="record-timer">0.0s</span>
+                    </div>
+                    <div class="progress-bar-bg hidden" id="record-progress-container">
+                        <div class="progress-bar-fill" id="record-progress-fill" style="width: 0%;"></div>
+                    </div>
+                    <div class="sample-info hidden" id="sample-info-box">
+                        <span>🎙️ サンプル取得完了: <strong id="sample-duration">0.0s</strong></span>
+                    </div>
+                </div>
+
+                <!-- 共通エフェクト・加工 -->
+                <div class="control-group">
+                    <h3>Sound Effects (エフェクト)</h3>
+                    <!-- 再生時間 (Synthのみ適用) -->
+                    <div class="slider-field" id="duration-slider-field">
+                        <div class="slider-label">
+                            <span>Max Duration (最大時間)</span>
+                            <span class="val" id="val-duration">0.5s</span>
+                        </div>
+                        <input type="range" id="param-duration" min="0.1" max="5.0" value="0.5" step="0.1">
+                    </div>
+                    <!-- ピッチ調整 -->
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Pitch / Speed (ピッチ・再生速度)</span>
+                            <span class="val" id="val-pitch">1.0x</span>
+                        </div>
+                        <input type="range" id="param-pitch" min="0.5" max="2.0" value="1.0" step="0.05">
+                    </div>
+                    <!-- エコー/ディレイ -->
+                    <div class="grid-2-col">
+                        <div class="slider-field">
+                            <div class="slider-label">
+                                <span>Echo Delay (エコー遅延)</span>
+                                <span class="val" id="val-delay">0.0s</span>
+                            </div>
+                            <input type="range" id="param-delay" min="0.0" max="1.0" value="0.0" step="0.05">
+                        </div>
+                        <div class="slider-field">
+                            <div class="slider-label">
+                                <span>Echo Feedback</span>
+                                <span class="val" id="val-feedback">0%</span>
+                            </div>
+                            <input type="range" id="param-feedback" min="0" max="90" value="0" step="5">
+                        </div>
+                    </div>
+                    <!-- フィルター -->
+                    <div class="grid-2-col">
+                        <div class="select-field">
+                            <label for="param-filter-type">Filter Type</label>
+                            <select id="param-filter-type">
+                                <option value="none">None (フィルターなし)</option>
+                                <option value="lowpass">Lowpass (低域カット - こもり音)</option>
+                                <option value="highpass">Highpass (高域カット - ラジオ風)</option>
+                            </select>
+                        </div>
+                        <div class="slider-field">
+                            <div class="slider-label">
+                                <span>Cutoff Freq</span>
+                                <span class="val" id="val-cutoff">2000Hz</span>
+                            </div>
+                            <input type="range" id="param-cutoff" min="100" max="10000" value="2000" step="100">
+                        </div>
+                    </div>
+                    <!-- ディストーション -->
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Distortion (ディストーション)</span>
+                            <span class="val" id="val-distortion">0%</span>
+                        </div>
+                        <input type="range" id="param-distortion" min="0" max="100" value="0" step="5">
+                    </div>
+                    <!-- Pro機能: 逆再生 -->
+                    <div class="checkbox-field">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="param-reverse">
+                            <span>Reverse Playback (逆再生) <span class="badge-pro">Pro</span></span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- ランダム生成 & プリセット保存 -->
+                <div class="control-group">
+                    <h3>Quick Presets & Randomizer</h3>
+                    <!-- クイックランダム合成 -->
+                    <div class="random-buttons">
+                        <button class="btn btn-secondary btn-sm" data-random="laser">⚡ Laser</button>
+                        <button class="btn btn-secondary btn-sm" data-random="coin">🪙 Coin</button>
+                        <button class="btn btn-secondary btn-sm" data-random="explosion">💥 Explode</button>
+                        <button class="btn btn-secondary btn-sm" data-random="jump">🦘 Jump</button>
+                        <button class="btn btn-primary btn-sm btn-block" id="btn-randomize">🔀 Complete Random SE</button>
+                    </div>
+                    <!-- 自作プリセット保存 (Pro限定) -->
+                    <div class="preset-save-box">
+                        <label for="preset-name-input">Save Custom Preset <span class="badge-pro">Pro</span></label>
+                        <div class="input-group">
+                            <input type="text" id="preset-name-input" placeholder="My SE Name" disabled>
+                            <button class="btn btn-secondary btn-sm" id="btn-save-preset" disabled>Save</button>
+                        </div>
+                        <div class="select-field" style="margin-top: 10px; margin-bottom: 0;">
+                            <select id="select-presets" disabled>
+                                <option value="">-- Saved Presets --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- プレビュー＆出力 (右側) -->
+            <section class="preview-panel">
+                <div class="preview-card">
+                    <div class="preview-header">
+                        <span class="preview-title">Visualizer & Real-time Playback</span>
+                    </div>
+                    <div class="preview-body-wave">
+                        <canvas id="visualizer-canvas"></canvas>
+                    </div>
+                </div>
+
+                <!-- 再生・ダウンロードアクション -->
+                <div class="action-section">
+                    <button class="btn btn-primary btn-lg" id="btn-play">▶️ Play Sound (再生)</button>
+                    <button class="btn btn-secondary btn-lg" id="btn-stop">⏹️ Stop (停止)</button>
+                    <button class="btn btn-secondary btn-lg btn-block" id="btn-download-wav">💾 Download WAV</button>
+                </div>
+            </section>
+        </main>
+
+        <!-- フッター/ドネーション案内 -->
+        <footer class="app-footer">
+            <p>© 2026 T9S Studio. All tools process entirely on your device.</p>
+            <div class="footer-fund-info">
+                <span>💻 PC Fund: <strong>$185 / $1,200</strong></span>
+                <span class="divider">|</span>
+                <a href="#support" id="footer-support-link">☕ Support Project</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Proアンロックモーダル -->
+    <div class="modal" id="pro-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💎 Pro Features Unlock</h2>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>「サンプリング音声の逆再生」</strong>や<strong>「自作プリセット保存」</strong>などの高度なプロ機能は、Pro版限定となっています。
+                </p>
+                <div class="modal-fund-box">
+                    <h4>新しい開発PC基金へのご協力をお願いします</h4>
+                    <p>
+                        現在、開発者はオンデバイスAI開発などのため、新しいPCの購入資金を募っています。Buy Me a Coffee 等で <strong>$3 以上</strong> の支援を行っていただくか、プロジェクトを応援してアンロックキーを入手してください！
+                    </p>
+                    <div class="modal-action-links">
+                        <a href="https://www.buymeacoffee.com/" target="_blank" class="btn btn-primary btn-sm">☕ Buy Me a Coffee ($3~)</a>
+                    </div>
+                </div>
+                <div class="unlock-form">
+                    <label for="pro-key-input">アンロックキーを入力してください (例: 支援メッセージ等で提供されたキー)</label>
+                    <div class="input-group">
+                        <input type="text" id="pro-key-input" placeholder="T9S-XXXX-XXXX">
+                        <button class="btn btn-secondary" id="btn-submit-key">Apply Key</button>
+                    </div>
+                    <p class="error-msg hidden" id="key-error-msg">無効なキーです。もう一度お確かめください。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div class="toast hidden" id="toast-notification"></div>
+    <script src="app.js"></script>
+</body>
+</html>
