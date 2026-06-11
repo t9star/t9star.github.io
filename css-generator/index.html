@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Glassmorphism & Shadow UI Generator - T9S Studio</title>
+    <meta name="description" content="グラスモーフィズム、多重シャドウ、ニューモーフィズムなどの美麗なCSSおよびTailwind CSSコードを、プレビューを見ながら直感的に自動生成するデザインユーティリティです。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="app-container">
+        <!-- ヘッダー -->
+        <header class="app-header">
+            <div class="header-left">
+                <a href="../index.html" class="back-link">
+                    <span class="icon">←</span> Portal
+                </a>
+                <span class="divider">|</span>
+                <span class="logo-icon">💅</span>
+                <div class="title-group">
+                    <h1>CSS UI & Shadow Generator</h1>
+                    <p>Design modern glass and neumorphic styles with live preview</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-secondary btn-sm" id="pro-status-btn">💎 Get Pro</button>
+            </div>
+        </header>
+
+        <!-- メインエリア -->
+        <main class="app-main">
+            <!-- コントロールパネル (左側) -->
+            <section class="control-panel">
+                <!-- スタイルタイプ -->
+                <div class="control-group">
+                    <h3>UI Style</h3>
+                    <div class="tabs" id="style-tabs">
+                        <button class="tab-btn active" data-style="glass">Glass</button>
+                        <button class="tab-btn" data-style="shadow">Shadow</button>
+                        <button class="tab-btn" data-style="neumorphic">Neumorphic</button>
+                    </div>
+                </div>
+
+                <!-- Glassmorphismパラメータ -->
+                <div class="control-group" id="params-glass">
+                    <h3>Glass Settings</h3>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Backdrop Blur (背景ぼかし)</span>
+                            <span class="val" id="val-glass-blur">8px</span>
+                        </div>
+                        <input type="range" id="param-glass-blur" min="0" max="24" value="8" step="1">
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Opacity (不透明度)</span>
+                            <span class="val" id="val-glass-opacity">25%</span>
+                        </div>
+                        <input type="range" id="param-glass-opacity" min="0" max="100" value="25" step="5">
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Border Opacity (枠線の透明度)</span>
+                            <span class="val" id="val-glass-border">20%</span>
+                        </div>
+                        <input type="range" id="param-glass-border" min="0" max="100" value="20" step="5">
+                    </div>
+                    <div class="color-picker-field" style="margin-top: 14px;">
+                        <label for="color-glass-bg">Base Color:</label>
+                        <input type="color" id="color-glass-bg" value="#ffffff">
+                    </div>
+                </div>
+
+                <!-- Multi-Shadowパラメータ -->
+                <div class="control-group hidden" id="params-shadow">
+                    <h3>Multi-Shadow Settings</h3>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Shadow Layers (重なり数)</span>
+                            <span class="val" id="val-shadow-layers">3</span>
+                        </div>
+                        <input type="range" id="param-shadow-layers" min="1" max="6" value="3" step="1">
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Blur Radius (ぼかしの半径)</span>
+                            <span class="val" id="val-shadow-blur">20px</span>
+                        </div>
+                        <input type="range" id="param-shadow-blur" min="0" max="100" value="20" step="5">
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Spread (影の広がり)</span>
+                            <span class="val" id="val-shadow-spread">0px</span>
+                        </div>
+                        <input type="range" id="param-shadow-spread" min="-20" max="30" value="0" step="1">
+                    </div>
+                    <div class="color-picker-field" style="margin-top: 14px;">
+                        <label for="color-shadow-base">Shadow Color:</label>
+                        <input type="color" id="color-shadow-base" value="#8b5cf6">
+                    </div>
+                </div>
+
+                <!-- Neumorphismパラメータ -->
+                <div class="control-group hidden" id="params-neumorphic">
+                    <h3>Neumorphic Settings</h3>
+                    <div class="color-picker-field" style="margin-bottom: 14px;">
+                        <label for="color-neu-base">Base Color (背景色と同調):</label>
+                        <input type="color" id="color-neu-base" value="#e0e0e0">
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Size (距離)</span>
+                            <span class="val" id="val-neu-size">20px</span>
+                        </div>
+                        <input type="range" id="param-neu-size" min="5" max="60" value="20" step="1">
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Blur (ぼかし)</span>
+                            <span class="val" id="val-neu-blur">40px</span>
+                        </div>
+                        <input type="range" id="param-neu-blur" min="5" max="100" value="40" step="5">
+                    </div>
+
+                    <!-- Pro機能：光源と形状 -->
+                    <div class="select-field">
+                        <label for="param-neu-shape">Shape (形状) <span class="badge-pro">Pro</span></label>
+                        <select id="param-neu-shape" disabled>
+                            <option value="flat" selected>Flat (フラット)</option>
+                            <option value="concave">Concave (内側凹み)</option>
+                            <option value="convex">Convex (外側膨らみ)</option>
+                        </select>
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>Light Angle (光源角度) <span class="badge-pro">Pro</span></span>
+                            <span class="val" id="val-neu-angle">135° (左上)</span>
+                        </div>
+                        <input type="range" id="param-neu-angle" min="0" max="360" value="135" step="15" disabled>
+                    </div>
+                </div>
+
+                <!-- 背景変更 -->
+                <div class="control-group">
+                    <h3>Preview Background</h3>
+                    <div class="bg-selector" id="bg-selector">
+                        <div class="bg-option active" data-bg="gradient-mesh" style="background: linear-gradient(135deg, #ec4899, #8b5cf6, #06b6d4);"></div>
+                        <div class="bg-option" data-bg="dots" style="background: #111827;"></div>
+                        <div class="bg-option" data-bg="image" style="background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&auto=format&fit=crop&q=60'); background-size: cover;"></div>
+                        <div class="bg-option" data-bg="neu-solid" id="bg-option-neu" style="background: #e0e0e0; display: none;"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- プレビュー＆出力 (右側) -->
+            <section class="preview-panel">
+                <!-- ライブプレビューカード -->
+                <div class="preview-card-wrap">
+                    <div class="preview-card-bg" id="preview-stage">
+                        <!-- ここにスタイルを適用するデモコンポーネントが置かれます -->
+                        <div class="demo-card" id="demo-box">
+                            <span class="demo-badge">T9S STUDIO</span>
+                            <h4 id="demo-title">Live Preview</h4>
+                            <p id="demo-text">パラメータを動かすと、このカードにリアルタイムで装飾コード（CSS/Tailwind）が適用されます。</p>
+                            <div class="demo-buttons">
+                                <button class="btn btn-primary btn-sm" id="demo-btn-1">Confirm</button>
+                                <button class="btn btn-secondary btn-sm" id="demo-btn-2">Cancel</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Pro限定：マルチカードテンプレート -->
+                        <div class="template-layout hidden" id="pro-template-layout">
+                            <div class="template-sidebar" id="demo-sidebar">
+                                <span class="sidebar-item active">🏠 Home</span>
+                                <span class="sidebar-item">📊 Reports</span>
+                                <span class="sidebar-item">⚙️ Settings</span>
+                            </div>
+                            <div class="template-main">
+                                <div class="widget-grid">
+                                    <div class="widget" id="demo-widget-1">
+                                        <h5>Users</h5>
+                                        <p>+15% this week</p>
+                                    </div>
+                                    <div class="widget" id="demo-widget-2">
+                                        <h5>Income</h5>
+                                        <p>$4,250 raised</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- コード出力エリア -->
+                <div class="code-output-card">
+                    <div class="code-tabs">
+                        <button class="code-tab active" data-lang="css">CSS Variables</button>
+                        <button class="code-tab" data-lang="tailwind">Tailwind CSS <span class="badge-pro" id="tab-tw-badge">Pro</span></button>
+                    </div>
+                    <div class="code-body">
+                        <textarea id="code-textarea" readonly></textarea>
+                        <button class="btn btn-secondary btn-sm" id="btn-copy-code">📋 Copy Code</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- フッター -->
+        <footer class="app-footer">
+            <p>© 2026 T9S Studio. All tools process entirely on your device.</p>
+            <div class="footer-fund-info">
+                <span>💻 PC Fund: <strong>$185 / $1,200</strong></span>
+                <span class="divider">|</span>
+                <a href="#support" id="footer-support-link">☕ Support Project</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Proアンロックモーダル -->
+    <div class="modal" id="pro-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💎 Pro Features Unlock</h2>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>「Tailwind CSSコード出力」</strong>や<strong>「プロ用レイアウトテンプレート（ダッシュボード等）」</strong>などの高度なプロ機能は、Pro版限定となっています。
+                </p>
+                <div class="modal-fund-box">
+                    <h4>新しい開発PC基金へのご協力をお願いします</h4>
+                    <p>
+                        現在、開発者はオンデバイスAI開発などのため、新しいPCの購入資金を募っています。Buy Me a Coffee 等で <strong>$3 以上</strong> の支援を行っていただくか、プロジェクトを応援してアンロックキーを入手してください！
+                    </p>
+                    <div class="modal-action-links">
+                        <a href="https://www.buymeacoffee.com/" target="_blank" class="btn btn-primary btn-sm">☕ Buy Me a Coffee ($3~)</a>
+                    </div>
+                </div>
+                <div class="unlock-form">
+                    <label for="pro-key-input">アンロックキーを入力してください (例: 支援メッセージ等で提供されたキー)</label>
+                    <div class="input-group">
+                        <input type="text" id="pro-key-input" placeholder="T9S-XXXX-XXXX">
+                        <button class="btn btn-secondary" id="btn-submit-key">Apply Key</button>
+                    </div>
+                    <p class="error-msg hidden" id="key-error-msg">無効なキーです。もう一度お確かめください。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div class="toast hidden" id="toast-notification"></div>
+    <script src="app.js"></script>
+</body>
+</html>

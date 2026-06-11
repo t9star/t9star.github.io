@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen Recorder & Web-to-GIF Converter - T9S Studio</title>
+    <meta name="description" content="ブラウザ画面をワンクリック録画し、余計なアップロード無しに高品質GIFアニメーションやWebM動画にその場でローカル変換できる便利ツール。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- gifshot CDN (完全クライアントサイドでの動画→GIF変換用ライブラリ) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gifshot/0.4.5/gifshot.min.js"></script>
+</head>
+<body>
+    <div class="bg-glow"></div>
+
+    <div class="app-container">
+        <!-- ヘッダー -->
+        <header class="app-header">
+            <div class="header-left">
+                <a href="../index.html" class="back-link">
+                    <span class="icon">←</span> Portal
+                </a>
+                <span class="divider">|</span>
+                <span class="logo-icon">🎥</span>
+                <div class="title-group">
+                    <h1>Screen Recorder & Web-to-GIF</h1>
+                    <p>Record your screen and export to animated GIF instantly</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-secondary btn-sm" id="pro-status-btn">💎 Get Pro</button>
+            </div>
+        </header>
+
+        <!-- メインエリア -->
+        <main class="app-main">
+            <!-- コントロールパネル (左側) -->
+            <section class="control-panel">
+                <!-- 録画コントロール -->
+                <div class="control-group">
+                    <h3>Screen Recording</h3>
+                    <p class="desc-text">録画を開始して、画面全体、特定のウィンドウ、またはブラウザのタブを選択してください。</p>
+                    <div class="recording-actions">
+                        <button class="btn btn-primary btn-block" id="btn-start-record">⏺️ Record Screen</button>
+                        <button class="btn btn-secondary btn-block hidden" id="btn-stop-record">⏹️ Stop Recording</button>
+                    </div>
+                    <!-- 録画中の点滅シグナル -->
+                    <div class="status-indicator hidden" id="recording-status">
+                        <span class="pulse-red"></span>
+                        <span id="record-timer">00:00</span>
+                    </div>
+                </div>
+
+                <!-- GIF変換コントロール -->
+                <div class="control-group" id="gif-convert-group" style="display: none;">
+                    <h3>GIF Export Settings</h3>
+                    <p class="desc-text">録画した動画をアニメーションGIF画像へ変換します。</p>
+                    
+                    <!-- Pro機能：解像度とFPS -->
+                    <div class="grid-2-col">
+                        <div class="select-field">
+                            <label for="param-gif-fps">Frame Rate <span class="badge-pro">Pro</span></label>
+                            <select id="param-gif-fps" disabled>
+                                <option value="5">5 FPS</option>
+                                <option value="10" selected>10 FPS (標準)</option>
+                                <option value="15">15 FPS</option>
+                                <option value="20">20 FPS</option>
+                            </select>
+                        </div>
+                        <div class="select-field">
+                            <label for="param-gif-width">Resolution <span class="badge-pro">Pro</span></label>
+                            <select id="param-gif-width" disabled>
+                                <option value="320">320px (軽量)</option>
+                                <option value="480" selected>480px (標準)</option>
+                                <option value="720">720px (高画質)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Pro機能：トリミング時間 -->
+                    <div class="slider-field" style="margin-top: 14px;">
+                        <div class="slider-label">
+                            <span>Start Trim (開始位置) <span class="badge-pro">Pro</span></span>
+                            <span class="val" id="val-trim-start">0.0s</span>
+                        </div>
+                        <input type="range" id="param-trim-start" min="0" max="10" value="0" step="0.5" disabled>
+                    </div>
+                    <div class="slider-field">
+                        <div class="slider-label">
+                            <span>End Trim (終了位置) <span class="badge-pro">Pro</span></span>
+                            <span class="val" id="val-trim-end">5.0s</span>
+                        </div>
+                        <input type="range" id="param-trim-end" min="0.5" max="30" value="5.0" step="0.5" disabled>
+                    </div>
+
+                    <button class="btn btn-primary btn-block" style="margin-top: 16px;" id="btn-convert-gif">🔄 Convert Video to GIF</button>
+                </div>
+            </section>
+
+            <!-- プレビュー＆出力 (右側) -->
+            <section class="preview-panel">
+                <!-- 動画プレビュー -->
+                <div class="preview-card" id="card-video-preview">
+                    <div class="preview-header">
+                        <span class="preview-title">Video Preview (WebM)</span>
+                    </div>
+                    <div class="preview-body-video">
+                        <p class="placeholder-text" id="video-placeholder">画面を録画するとここに動画が表示されます</p>
+                        <video id="recorded-video" controls class="hidden"></video>
+                    </div>
+                    <div class="download-bar hidden" id="video-download-bar">
+                        <button class="btn btn-secondary btn-block" id="btn-download-video">💾 Download Video (WebM)</button>
+                    </div>
+                </div>
+
+                <!-- GIFプレビュー -->
+                <div class="preview-card" id="card-gif-preview" style="display: none;">
+                    <div class="preview-header">
+                        <span class="preview-title">GIF Preview</span>
+                    </div>
+                    <div class="preview-body-gif">
+                        <p class="placeholder-text" id="gif-placeholder">GIFに変換するとここにプレビュー画像が表示されます</p>
+                        <div class="progress-bar-bg hidden" id="gif-progress-container">
+                            <div class="progress-bar-fill" id="gif-progress-fill" style="width: 0%;"></div>
+                        </div>
+                        <img id="gif-preview-img" class="hidden" alt="Generated GIF">
+                    </div>
+                    <div class="download-bar hidden" id="gif-download-bar">
+                        <button class="btn btn-secondary btn-block" id="btn-download-gif">💾 Download Animated GIF</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- フッター -->
+        <footer class="app-footer">
+            <p>© 2026 T9S Studio. All tools process entirely on your device.</p>
+            <div class="footer-fund-info">
+                <span>💻 PC Fund: <strong>$185 / $1,200</strong></span>
+                <span class="divider">|</span>
+                <a href="#support" id="footer-support-link">☕ Support Project</a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Proアンロックモーダル -->
+    <div class="modal" id="pro-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>💎 Pro Features Unlock</h2>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <strong>「動画トリミング機能」</strong>や<strong>「解像度・FPSのカスタム設定」</strong>などの高度なプロ機能は、Pro版限定となっています。
+                </p>
+                <div class="modal-fund-box">
+                    <h4>新しい開発PC基金へのご協力をお願いします</h4>
+                    <p>
+                        現在、開発者はオンデバイスAI開発などのため、新しいPCの購入資金を募っています。Buy Me a Coffee 等で <strong>$3 以上</strong> の支援を行っていただくか、プロジェクトを応援してアンロックキーを入手してください！
+                    </p>
+                    <div class="modal-action-links">
+                        <a href="https://www.buymeacoffee.com/" target="_blank" class="btn btn-primary btn-sm">☕ Buy Me a Coffee ($3~)</a>
+                    </div>
+                </div>
+                <div class="unlock-form">
+                    <label for="pro-key-input">アンロックキーを入力してください (例: 支援メッセージ等で提供されたキー)</label>
+                    <div class="input-group">
+                        <input type="text" id="pro-key-input" placeholder="T9S-XXXX-XXXX">
+                        <button class="btn btn-secondary" id="btn-submit-key">Apply Key</button>
+                    </div>
+                    <p class="error-msg hidden" id="key-error-msg">無効なキーです。もう一度お確かめください。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- トースト通知 -->
+    <div class="toast hidden" id="toast-notification"></div>
+    <script src="app.js"></script>
+</body>
+</html>
