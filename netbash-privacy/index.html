@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>プライバシーポリシー | NetBash: Idle Terminal</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --surface: #151d30;
+      --border: #233152;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #00ffaa;
+      --accent-hover: #00e599;
+      --accent2: #00e5ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+      line-height: 1.8;
+      padding: 0 16px;
+    }
+    header {
+      background: linear-gradient(135deg, #0f172a, #0b0f19);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0 32px;
+      text-align: center;
+    }
+    header .logo {
+      font-size: 2.4rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 0.05em;
+    }
+    header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 8px;
+    }
+    .lang-toggle {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px auto 0;
+    }
+    .lang-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 20px;
+      padding: 8px 24px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
+      font-weight: 600;
+    }
+    .lang-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #0b0f19;
+    }
+    main {
+      max-width: 800px;
+      margin: 40px auto 80px;
+      background: var(--surface);
+      padding: 40px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    section { margin-bottom: 40px; }
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    p, ul {
+      color: var(--text);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    a {
+      color: var(--accent2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+    .contact-box {
+      background: rgba(0, 255, 170, 0.05);
+      border: 1px dashed var(--accent);
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .contact-box p { margin-bottom: 0; }
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+    /* Language visibility */
+    .lang-en { display: none; }
+    body.en .lang-ja { display: none; }
+    body.en .lang-en { display: block; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">NetBash: Idle Terminal</div>
+  <p class="lang-ja">プライバシーポリシー</p>
+  <p class="lang-en">Privacy Policy</p>
+  
+  <div class="lang-toggle">
+    <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">日本語</button>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+</header>
+
+<main>
+  <!-- ==================== JAPANESE CONTENT ==================== -->
+  <div class="lang-ja">
+    <section>
+      <h2>1. はじめに</h2>
+      <p>本プライバシーポリシーは、個人開発者「Ryota Nakano」（以下「当開発者」）が提供するスマートフォン向けアプリケーション「NetBash: Idle Terminal」（以下「本アプリ」）における、ユーザー情報の取扱いについて定めるものです。</p>
+      <p>当開発者は、ユーザーのプライバシー保護を極めて重要視しており、以下の方針に従って情報の適正な管理と保護に努めます。</p>
+    </section>
+
+    <section>
+      <h2>2. 収集する情報とその利用目的</h2>
+      <p>本アプリ自体が、ユーザーの氏名、メールアドレス、電話番号、位置情報などの個人情報を直接収集、保存、または送信することはありません。ただし、アプリの機能提供、利便性向上、および広告配信のために、以下のサードパーティ製SDKを通じて自動的にデータを取得・処理する場合があります。</p>
+      
+      <ul>
+        <li>
+          <strong>広告配信（Google AdMob SDK）</strong>
+          <ul>
+            <li><strong>収集される情報:</strong> 広告ID（GAID/IDFA）、デバイスモデル、OSバージョン、通信キャリア、位置情報に基づく匿名の統計データ。</li>
+            <li><strong>利用目的:</strong> アプリ内での広告（動画リワード広告、バナー等）のパーソナライズ配信、広告効果の測定、および広告制限（同じ広告の過度な表示防止）。</li>
+          </ul>
+        </li>
+        <li>
+          <strong>アプリ内課金（Google Play Billing SDK）</strong>
+          <ul>
+            <li><strong>収集される情報:</strong> トランザクションID、購入日時、購入アイテムのステータス（個人を特定するクレジットカード番号等の情報は取得しません）。</li>
+            <li><strong>利用目的:</strong> 購入したゲーム内アイテム（ハッカー・ライセンス等）の認証および付与。</li>
+          </ul>
+        </li>
+        <li>
+          <strong>ゲームの進行状況および実績（Google Play Games Services SDK）</strong>
+          <ul>
+            <li><strong>収集される情報:</strong> Googleアカウントに関連付けられたプレイヤーID、実績解除状況、リーダーボードのスコア、クラウド保存された暗号化ゲームデータ。</li>
+            <li><strong>利用目的:</strong> 異なるデバイス間でのデータの引き継ぎ（クラウドセーブ）、実績およびリーダーボード機能の提供。</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. 外部送信と第三者提供</h2>
+      <p>本アプリが収集する情報は、上記のSDKプロバイダーであるGoogle LLCなどの第三者へ送信され、各社のプライバシーポリシーに基づいて管理されます。当開発者がこれらの情報を上記以外の第三者に販売または提供することはありません。</p>
+      <p>各SDKプロバイダーのプライバシーポリシーは以下よりご確認ください。</p>
+      <ul>
+        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google プライバシー ポリシー（Google Play 開発者サービス）</a></li>
+        <li><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google AdMob（広告）ポリシー</a></li>
+        <li><a href="https://support.google.com/googleplay/android-developer/answer/9858738" target="_blank" rel="noopener">Google Play アプリの完全性と署名について</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. データの保存期間とセキュリティ</h2>
+      <ul>
+        <li>ユーザーのゲーム進行データは、ユーザーのデバイスのローカルストレージ（SharedPreferences）に保存されます。</li>
+        <li>クラウドセーブデータは、Google Play Games Servicesの暗号化された安全なサーバーに保存されます。</li>
+        <li>当開発者が独自のデータベース等にユーザーのゲームデータを直接保存・蓄積することはありません。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. データの削除ポリシー（データ削除リクエスト）</h2>
+      <p>Google Playストアのポリシーに基づき、ユーザーはご自身のゲームデータの削除をいつでも要求できます。</p>
+      <ul>
+        <li><strong>ローカルデータ:</strong> スマートフォンの端末設定から本アプリの「データを消去」または「アプリをアンインストール」することで、デバイス上のデータは即座に完全に削除されます。</li>
+        <li><strong>クラウドデータ:</strong> Google Play Games Services に保存されたセーブデータを削除したい場合は、スマートフォンの「Play ゲーム」アプリの設定 ＞ 「Play ゲームのアカウントとデータの削除」から、本アプリのデータを削除することができます。</li>
+        <li><strong>その他のお問い合わせ:</strong> 上記の方法で削除できない場合や、データの削除についてサポートが必要な場合は、下記の問い合わせ窓口（メール）宛にご連絡ください。申請に基づき、速やかに対応いたします。</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. 子供のプライバシー保護</h2>
+      <p>本アプリは13歳未満のお子様を対象として設計されたものではなく、意図的に13歳未満の児童から個人情報を収集することはありません。万が一、13歳未満の児童が親権者の同意なしに情報を送信したことが判明した場合、直ちにサーバー等から該当データを削除する措置を講じます。</p>
+    </section>
+
+    <section>
+      <h2>7. プライバシーポリシーの改定</h2>
+      <p>当開発者は、法令の変更や本アプリのアップデート等に伴い、本プライバシーポリシーを随時改定することがあります。改定されたポリシーは、本ページに掲載された時点から有効となります。</p>
+    </section>
+
+    <section>
+      <h2>8. お問い合わせ窓口</h2>
+      <p>本プライバシーポリシー、およびユーザー情報の取扱いに関するご質問・データ削除依頼は、以下のメールアドレスまでご連絡ください。</p>
+      <div class="contact-box">
+        <p><strong>開発者/管理者:</strong> Ryota Nakano</p>
+        <p><strong>連絡先メールアドレス:</strong> <a href="mailto:frog9.t9s@gmail.com">frog9.t9s@gmail.com</a></p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== ENGLISH CONTENT ==================== -->
+  <div class="lang-en">
+    <section>
+      <h2>1. Introduction</h2>
+      <p>This Privacy Policy outlines how individual developer "Ryota Nakano" ("we," "our," or "us") handles user data in the smartphone application "NetBash: Idle Terminal" ("the App").</p>
+      <p>We are highly committed to protecting your privacy, and we manage and protect user information in accordance with this policy.</p>
+    </section>
+
+    <section>
+      <h2>2. Information Collected and Purpose of Use</h2>
+      <p>The App itself does not directly collect, store, or transmit personal data such as names, email addresses, phone numbers, or precise location information. However, to provide core features, process purchases, and display advertisements, we may automatically process non-personal data through the following third-party SDKs:</p>
+      
+      <ul>
+        <li>
+          <strong>Advertising (Google AdMob SDK)</strong>
+          <ul>
+            <li><strong>Data Processed:</strong> Advertising ID (GAID/IDFA), device model, OS version, carrier, and anonymous usage telemetry.</li>
+            <li><strong>Purpose:</strong> To deliver and personalize advertisements (rewarded ads, banners), measure ad performance, and prevent duplicate ad delivery.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>In-App Purchases (Google Play Billing SDK)</strong>
+          <ul>
+            <li><strong>Data Processed:</strong> Transaction IDs, purchase timestamp, and purchase status (no credit card or billing details are accessed by us).</li>
+            <li><strong>Purpose:</strong> To verify and unlock in-app premium items (such as the Hacker License).</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Game Progress & Achievements (Google Play Games Services SDK)</strong>
+          <ul>
+            <li><strong>Data Processed:</strong> Player account ID, unlocked achievement IDs, leaderboard scores, and encrypted cloud-save binary.</li>
+            <li><strong>Purpose:</strong> To sync game progress across multiple devices (Cloud Save), and to display achievements and leaderboards.</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Data Transfer and Third-Party Sharing</h2>
+      <p>Data processed by the SDKs listed above is transmitted directly to their respective providers (e.g., Google LLC) and managed under their own privacy policies. We do not sell or lease any user data to third parties.</p>
+      <p>Please refer to the third-party privacy policies below:</p>
+      <ul>
+        <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy (Google Play Services)</a></li>
+        <li><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google AdMob Policy</a></li>
+        <li><a href="https://support.google.com/googleplay/android-developer/answer/9858738" target="_blank" rel="noopener">Google Play App Integrity & Signing</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>4. Data Retention and Security</h2>
+      <ul>
+        <li>Your local game progress is stored securely in your device's local storage (SharedPreferences).</li>
+        <li>Your cloud progress is stored encrypted on Google Play Games Services' secure cloud infrastructure.</li>
+        <li>We do not host or maintain any external database to store or inspect your personal game progress.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. Data Deletion Policy</h2>
+      <p>In compliance with Google Play Store guidelines, you can request the deletion of your game data at any time.</p>
+      <ul>
+        <li><strong>Local Data:</strong> To wipe local data, navigate to your Android device settings, select the App, and select "Clear Data" or uninstall the App.</li>
+        <li><strong>Cloud Data:</strong> To wipe data stored in Google Play Games, open the "Play Games" app on your device, navigate to Settings > "Delete Play Games account & data", and select this App to permanently purge your profile.</li>
+        <li><strong>Manual Deletion Request:</strong> If you cannot delete your data using the above methods or require assistance, please contact us at the email address below. We will handle your request promptly.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>6. Children's Privacy</h2>
+      <p>The App is not designed for or targeted at children under the age of 13. We do not knowingly collect personal data from children under 13. If we discover that a child under 13 has provided personal data without parental consent, we will take immediate steps to delete that data from our records.</p>
+    </section>
+
+    <section>
+      <h2>7. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time to reflect changes in laws, regulations, or App updates. The updated policy becomes effective immediately upon publication on this page.</p>
+    </section>
+
+    <section>
+      <h2>8. Contact Information</h2>
+      <p>If you have any questions about this Privacy Policy, our data practices, or if you wish to request data deletion, please contact us at:</p>
+      <div class="contact-box">
+        <p><strong>Developer/Data Controller:</strong> Ryota Nakano</p>
+        <p><strong>Email Address:</strong> <a href="mailto:frog9.t9s@gmail.com">frog9.t9s@gmail.com</a></p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Ryota Nakano / t9s. All rights reserved.</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    if (lang === 'en') {
+      document.body.classList.add('en');
+      document.getElementById('btn-en').classList.add('active');
+      document.getElementById('btn-ja').classList.remove('active');
+    } else {
+      document.body.classList.remove('en');
+      document.getElementById('btn-en').classList.remove('active');
+      document.getElementById('btn-ja').classList.add('active');
+    }
+  }
+</script>
+</body>
+</html>
