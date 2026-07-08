@@ -138,6 +138,38 @@ html, body {
     color: var(--text-primary);
 }
 
+/* 言語スイッチャー */
+.lang-switcher {
+    display: flex;
+    gap: 2px;
+    background: rgba(139, 92, 26, 0.05);
+    border: 1px solid rgba(139, 92, 26, 0.1);
+    border-radius: var(--radius-sm);
+    padding: 2px;
+}
+
+.btn-lang {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 6px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-lang.active {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
+}
+
+.btn-lang:hover:not(.active) {
+    color: var(--text-primary);
+}
+
 /* ヒーローセクション */
 .hero-section {
     text-align: center;
