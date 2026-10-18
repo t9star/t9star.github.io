@@ -103,6 +103,30 @@ const translations = {
         "tool-se-step3": "「Play」で試聴し、ランダム機能で面白い音を発見し、「Download WAV」で書き出します。",
 
         // Mobile Apps
+        "app-sonic-title": "SonicFix: 水抜き・音波掃除",
+        "app-sonic-desc": "スピーカーに入り込んだ水滴やホコリを共振音波と超音波微振動で安全に弾き飛ばす排水アプリ。PCM周波数トーン生成や音響診断機能も搭載。",
+        "app-sonic-tag1": "音波水抜き",
+        "app-sonic-tag2": "周波数ジェネレータ",
+        "app-sonic-tag3": "オーディオ診断",
+
+        "app-ledger-title": "ツケ帳・売掛金ノート - LedgerPad",
+        "app-ledger-desc": "クラウド不要・100%端末内で安全に完結する個人事業主・スモールビジネス向けツケ・売掛金・現金出納帳管理ノート。期日リマインダー共有にも対応。",
+        "app-ledger-tag1": "100% オフライン",
+        "app-ledger-tag2": "売掛金・ツケ帳",
+        "app-ledger-tag3": "スモールビジネス",
+
+        "app-shrink-title": "Offline Photo Shrink",
+        "app-shrink-desc": "サーバーへの画像送信ゼロ。端末内のローカル処理だけで写真や画像を目標ファイルサイズ（KB/MB）へ超高速に圧縮できる軽量画像リデューサー。",
+        "app-shrink-tag1": "完全オフライン",
+        "app-shrink-tag2": "サイズ指定圧縮",
+        "app-shrink-tag3": "プライバシー第一",
+
+        "app-koyaku-title": "小役カウンターPRO",
+        "app-koyaku-desc": "パチスロの設定推測や子役カウントを片手で快適に行えるシンプル＆高レスポンスなカウンター。バイブレーション通知や出現率の自動計算に対応。",
+        "app-koyaku-tag1": "設定判別",
+        "app-koyaku-tag2": "片手操作",
+        "app-koyaku-tag3": "確率自動計算",
+
         "app-zen-title": "禅禅 (Zen Zen)",
         "app-zen-desc": "泡プチプチ、枯山水シミュレーション、リアルな風とチャイムなど、五感で楽しむオンデバイス完結型リラクゼーションアプリ。",
         "app-zen-tag1": "Jetpack Compose",
@@ -232,7 +256,40 @@ const translations = {
         "tool-svg-step2": "Use sliders to customize complexity, vertices, and gradient colors.",
         "tool-svg-step3": "Click 'Randomize' to morph the shape and copy/download the SVG code.",
 
+        "tool-se-title": "SE Generator",
+        "tool-se-desc": "An audio tool to generate, play, and download custom sound effects by sampling waves or microphone input, with pitch and echo filters.",
+        "tool-se-tag1": "Audio Synth",
+        "tool-se-tag2": "Sound Effect",
+        "tool-se-tag3": "Recording",
+        "tool-se-step1": "Select the sound source (sine, square, triangle, or mic recording).",
+        "tool-se-step2": "Adjust duration, pitch modulation, and echo (delay) parameters.",
+        "tool-se-step3": "Listen using 'Play', randomize for unique sounds, and click 'Download WAV'.",
+
         // Mobile Apps
+        "app-sonic-title": "SonicFix: Speaker Water Eject",
+        "app-sonic-desc": "Expel trapped water and dust from speakers using resonant sound waves and micro-vibrations. Features PCM tone generator and audio diagnostics.",
+        "app-sonic-tag1": "Water Eject",
+        "app-sonic-tag2": "Frequency Tone",
+        "app-sonic-tag3": "Audio Diagnostics",
+
+        "app-ledger-title": "LedgerPad: Offline Credit Book",
+        "app-ledger-desc": "100% offline, privacy-first ledger and cashbook for small businesses and freelancers. Track customer credits and share payment reminders with ease.",
+        "app-ledger-tag1": "100% Offline",
+        "app-ledger-tag2": "Credit Ledger",
+        "app-ledger-tag3": "Small Business",
+
+        "app-shrink-title": "Offline Photo Shrink",
+        "app-shrink-desc": "Compress photos to target file sizes (KB/MB) entirely on your device with zero server uploads. Ultra-fast, private, and lightweight image shrinker.",
+        "app-shrink-tag1": "100% Offline",
+        "app-shrink-tag2": "Target Size Shrink",
+        "app-shrink-tag3": "Privacy-First",
+
+        "app-koyaku-title": "Koyaku Counter PRO",
+        "app-koyaku-desc": "High-response, single-hand slot machine counter for calculating probabilities and tracking game symbols with haptic vibration feedback.",
+        "app-koyaku-tag1": "Slot Counter",
+        "app-koyaku-tag2": "One-Hand Use",
+        "app-koyaku-tag3": "Odds Calculator",
+
         "app-zen-title": "Zen Zen - Satisfying Fidgets",
         "app-zen-desc": "An on-device relaxation app featuring bubble wrap, zen gardens, realistic wind chimes, and tactile sensory experiences.",
         "app-zen-tag1": "Jetpack Compose",
@@ -358,7 +415,7 @@ function applyTranslations(lang) {
 
     // 4. モバイルアプリカードの動的翻訳（インデックス順マッピング）
     const mobileCards = document.querySelectorAll("#mobile-apps .app-card");
-    const mobileKeys = ["zen", "netbash", "nosavecrop", "spin", "dopa", "fan"];
+    const mobileKeys = ["sonic", "ledger", "shrink", "koyaku", "zen", "netbash", "nosavecrop", "spin", "dopa", "fan"];
     mobileCards.forEach((card, idx) => {
         const key = mobileKeys[idx];
         if (!key) return;
