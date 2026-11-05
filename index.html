@@ -33,7 +33,6 @@
                     <button class="btn-lang" id="btn-lang-ja" onclick="setLanguage('ja')">JA</button>
                     <button class="btn-lang" id="btn-lang-en" onclick="setLanguage('en')">EN</button>
                 </div>
-                <a href="#support-section" class="btn btn-secondary btn-sm" id="nav-support-btn" data-i18n="nav-support">☕ Support Project</a>
             </div>
         </header>
 
@@ -43,39 +42,6 @@
             <p class="hero-subtitle" data-i18n="hero-subtitle">
                 T9S Studio のツールは、データを外部のサーバーに送信せず、すべてブラウザ内（WebAssembly/IndexedDB）またはローカルデバイス上で動作します。安全、超高速、そして完全無料。
             </p>
-        </section>
-
-        <!-- PC基金＆寄付ウィジェット -->
-        <section class="fund-section" id="support-section">
-            <div class="fund-card">
-                <div class="fund-info">
-                    <span class="fund-badge" data-i18n="fund-badge">🎯 PROJECT GOAL</span>
-                    <h3 data-i18n="fund-title">新しい開発用PC基金 (High-Spec Dev Workstation Fund)</h3>
-                    <p data-i18n="fund-desc">
-                        現在、より重いコンパイル処理やオンデバイスAI開発を快適に行うための「新しい開発用PC」の購入資金を募っています。もしツールが役に立ったと感じたら、開発者にコーヒーを奢っていただけると非常に嬉しいです！
-                    </p>
-                    <div class="fund-progress-container">
-                        <div class="fund-progress-header">
-                            <span class="progress-raised" data-i18n-html="fund-raised">支援額: <strong>$185</strong> (約28,000円)</span>
-                            <span class="progress-target" data-i18n-html="fund-target">目標: <strong>$1,200</strong></span>
-                        </div>
-                        <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" id="pc-fund-progress" style="width: 15.4%;">
-                                <span class="progress-percent">15%</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="fund-actions">
-                    <a href="https://www.buymeacoffee.com/t9star" target="_blank" class="btn btn-primary btn-lg" id="fund-bmc-btn">
-                        <span class="btn-icon">☕</span> Buy Me a Coffee
-                    </a>
-                    <a href="https://ko-fi.com/t9star" target="_blank" class="btn btn-outline btn-lg" id="fund-kofi-btn">
-                        <span class="btn-icon">❤️</span> Ko-fi で支援する
-                    </a>
-                    <p class="unlock-note" data-i18n="fund-note">※ $3以上の支援で、ツールの「Pro版アンロックキー」を入手できます！</p>
-                </div>
-            </div>
         </section>
 
         <!-- メインセクション：Webツール -->
@@ -646,6 +612,6 @@
             <p class="footer-privacy" data-i18n="footer-privacy">すべてのデータはユーザーのローカル環境でのみ安全に保存・処理されます。サーバーへの自動送信はありません。</p>
         </footer>
     </div>
-    <script src="app.js?v=1.1" defer></script>
+    <script src="app.js?v=1.2" defer></script>
 </body>
 </html>
