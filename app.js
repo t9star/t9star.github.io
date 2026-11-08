@@ -1,12 +1,13 @@
 // T9S Studio Localization Engine
 const translations = {
     ja: {
+        "portal-subtitle": "Smart & Intuitive Android Applications",
         "nav-mobile": "モバイルアプリ",
-        "hero-title": "余計なサーバー処理は不要。<br><span class=\"gradient-text\">あなたのデバイス上で完結。</span>",
-        "hero-subtitle": "T9S Studio のアプリは、個人データを外部サーバーに送信せず、すべてお使いのデバイス上で安全に動作します。プライバシー第一、超高速、そして快適なモバイル体験をお届けします。",
+        "hero-title": "手のひらに、気の利いたアイデアを。<br><span class=\"gradient-text\">軽快でスマートなAndroidアプリ。</span>",
+        "hero-subtitle": "音波水抜き、オフライン写真圧縮、浮かぶ電卓、集中タイマーから、五感で楽しむリラクゼーションまで。T9S Studio は、日常の「こんなの欲しかった」を形にするシンプルで洗練されたAndroidアプリをお届けします。",
         "section-mobile-title": "Mobile Applications <span class=\"section-subtitle\">(Androidネイティブアプリ)</span>",
-        "footer-text": "&copy; 2026 T9S Studio. All rights reserved. Built with pride using vanilla client-side technologies.",
-        "footer-privacy": "すべてのデータはユーザーのローカル環境でのみ安全に保存・処理されます。サーバーへの自動送信はありません。",
+        "footer-text": "&copy; 2026 T9S Studio. All rights reserved. Crafted with passion for Android.",
+        "footer-privacy": "T9S Studio は、日常を快適にする軽量・安全・シンプルなAndroidアプリをお届けしています。",
         "download-play": "Google Play で入手",
 
         // Mobile Apps (16 Apps)
@@ -107,12 +108,13 @@ const translations = {
         "app-fan-tag3": "タイマー搭載"
     },
     en: {
+        "portal-subtitle": "Smart & Intuitive Android Applications",
         "nav-mobile": "Mobile Apps",
-        "hero-title": "No server processing required.<br><span class=\"gradient-text\">Everything runs on your device.</span>",
-        "hero-subtitle": "T9S Studio's apps operate safely on your device without sending private data to external servers. High performance, zero hassle, and built for privacy.",
+        "hero-title": "Clever tools in the palm of your hand.<br><span class=\"gradient-text\">Fast, simple, and intuitive.</span>",
+        "hero-subtitle": "From speaker water ejectors and offline photo compression to floating calculators and tactile relaxation apps, T9S Studio builds refined, lightweight Android apps designed for your daily life.",
         "section-mobile-title": "Mobile Applications <span class=\"section-subtitle\">(Android Native Apps)</span>",
-        "footer-text": "&copy; 2026 T9S Studio. All rights reserved. Built with pride using vanilla client-side technologies.",
-        "footer-privacy": "All data is safely stored and processed only in the user's local environment. No automatic transmission to servers.",
+        "footer-text": "&copy; 2026 T9S Studio. All rights reserved. Crafted with passion for Android.",
+        "footer-privacy": "T9S Studio crafts fast, safe, and intuitive Android apps to make everyday life easier.",
         "download-play": "Get it on Google Play",
 
         // Mobile Apps (16 Apps)
