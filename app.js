@@ -1,101 +1,51 @@
 // T9S Studio Localization Engine
 const translations = {
     ja: {
-        "nav-web": "Webツール",
         "nav-mobile": "モバイルアプリ",
         "hero-title": "余計なサーバー処理は不要。<br><span class=\"gradient-text\">あなたのデバイス上で完結。</span>",
-        "hero-subtitle": "T9S Studio のツールは、データを外部のサーバーに送信せず、すべてブラウザ内（WebAssembly/IndexedDB）またはローカルデバイス上で動作します。安全、超高速、そして完全無料。",
-        "section-web-title": "Web Utilities <span class=\"section-subtitle\">(ブラウザ完結型Webツール)</span>",
+        "hero-subtitle": "T9S Studio のアプリは、個人データを外部サーバーに送信せず、すべてお使いのデバイス上で安全に動作します。プライバシー第一、超高速、そして快適なモバイル体験をお届けします。",
         "section-mobile-title": "Mobile Applications <span class=\"section-subtitle\">(Androidネイティブアプリ)</span>",
         "footer-text": "&copy; 2026 T9S Studio. All rights reserved. Built with pride using vanilla client-side technologies.",
         "footer-privacy": "すべてのデータはユーザーのローカル環境でのみ安全に保存・処理されます。サーバーへの自動送信はありません。",
-        "launch-tool": "ツールを起動する",
         "download-play": "Google Play で入手",
-        "show-usage": "💡 使い方を表示",
 
-        // Web Tools
-        "tool-mockup-title": "Mockup Studio",
-        "tool-mockup-desc": "スクリーンショットをアップロードするだけで、iPhoneやMacBookなどの洗練された3D風デバイスフレームに合成できるモックアップジェネレーター。",
-        "tool-mockup-tag1": "ブラウザ処理",
-        "tool-mockup-tag2": "PNG出力",
-        "tool-mockup-tag3": "Pro版キー対応",
-        "tool-mockup-step1": "スクリーンショット画像をアップロードするか、ドラッグ＆ドロップします。",
-        "tool-mockup-step2": "デバイスフレーム（iPhone/MacBookなど）やベゼルのカラー（Space Gray/Goldなど）を選択します。",
-        "tool-mockup-step3": "必要に応じてキャプション（文字サイズ・色）を設定し、ダウンロードボタンで画像を書き出します。",
+        // Mobile Apps (16 Apps)
+        "app-snore-title": "SnoreWhisper - 快眠・いびき記録",
+        "app-snore-desc": "睡眠中のいびきや寝言をスマートに自動検知・録音・分析。完全オンデバイス処理でプライバシーを守りながら睡眠の質を可視化。",
+        "app-snore-tag1": "オンデバイスAI",
+        "app-snore-tag2": "いびき検知",
+        "app-snore-tag3": "プライバシー保護",
 
-        "tool-git-title": "Git Visualizer",
-        "tool-git-desc": "インタラクティブにGitコマンドを打ち込み、ブランチツリーやコミットグラフがどのように動くかをビジュアルで学習できるシミュレータ。",
-        "tool-git-tag1": "Git学習",
-        "tool-git-tag2": "インタラクティブ",
-        "tool-git-tag3": "Sandbox",
-        "tool-git-step1": "左メニューから「レッスン」を選択するか、「Sandbox（自由入力）」モードを開始します。",
-        "tool-git-step2": "右上のターミナル疑似入力欄に `git commit` や `git checkout` などのコマンドを入力します。",
-        "tool-git-step3": "コミットツリーが動的に変化し、ブランチやHEADの概念をアニメーションで視覚的に学習できます。",
+        "app-rebell-title": "ReBell: しつこいリマインダー・繰り返し通知",
+        "app-rebell-desc": "タスクを完了するまで何度でもしつこく鳴り続ける強力リマインダー。重要な服薬や予定のうっかり忘れを確実に防止。",
+        "app-rebell-tag1": "しつこい通知",
+        "app-rebell-tag2": "忘れ防止",
+        "app-rebell-tag3": "フルスクリーンアラーム",
 
-        "tool-oss-title": "OSS Alternatives",
-        "tool-oss-desc": "有名な商用ソフトウェアやSaaSの代わりとなる、プライバシー重視でオープンソースの優れた代替ツールを発見できるキュレーションデータベース。",
-        "tool-oss-tag1": "代替ソフト",
-        "tool-oss-tag2": "OSS推奨",
-        "tool-oss-tag3": "GitHub連携",
-        "tool-oss-step1": "検索バーに代替を探したいソフト名（例: Photoshop, Slack）を入力するか、カテゴリ一覧をクリックします。",
-        "tool-oss-step2": "各OSSプロジェクトのGitHub Star数や最終更新日、ライセンス情報がリアルタイムに表示されます。",
-        "tool-oss-step3": "「Website」リンクから各ツールの公式サイトへアクセスし、自分に合った代替ツールを選択します。",
+        "app-noexif-title": "NoExif: 写真の位置情報・Exif削除",
+        "app-noexif-desc": "写真や動画からGPS位置情報や撮影日時、端末情報を無劣化で一括削除。SNS投稿前のプライバシー漏洩を完全ガード。",
+        "app-noexif-tag1": "Exif一括削除",
+        "app-noexif-tag2": "無劣化処理",
+        "app-noexif-tag3": "100% オフライン",
 
-        "tool-pixel-title": "Pixel Art Editor",
-        "tool-pixel-desc": "レイヤー機能、カスタムカラーパレット、アニメーション書き出し機能を備え、ブラウザ上で直感的にドット絵を作成・編集できるエディタ。",
-        "tool-pixel-tag1": "画像編集",
-        "tool-pixel-tag2": "ドット絵",
-        "tool-pixel-tag3": "GIF書き出し",
-        "tool-pixel-step1": "キャンバスサイズ（例: 16x16, 32x32）を設定し、描画を開始します。",
-        "tool-pixel-step2": "カラーパレットから色を選び、鉛筆、バケツ、消しゴムツールでドットを打ちます。",
-        "tool-pixel-step3": "「Export」ボタンから、拡大したPNG画像やアニメーションGIFとしてローカルに保存します。",
+        "app-floatcalc-title": "FloatCalc - 浮かぶ電卓 & 定型文",
+        "app-floatcalc-desc": "どのアプリを開いていても画面上に浮かぶフローティング電卓。フリマ計算やよく使う定型文・住所のワンタップコピーも搭載。",
+        "app-floatcalc-tag1": "画面上常駐",
+        "app-floatcalc-tag2": "定型文クリップ",
+        "app-floatcalc-tag3": "税込・手数料計算",
 
-        "tool-screen-title": "Screen Recorder",
-        "tool-screen-desc": "外部サーバーを一切介さず、完全ローカル（ブラウザ内）で画面録画、マイク音声・システム音声のキャプチャ、およびWebM形式の保存ができるツール。",
-        "tool-screen-tag1": "画面録画",
-        "tool-screen-tag2": "音声キャプチャ",
-        "tool-screen-tag3": "ブラウザ完結",
-        "tool-screen-step1": "録画対象（画面全体、特定のウィンドウ、またはブラウザのタブ）を選択します。",
-        "tool-screen-step2": "マイク音声やシステム音声を録音に含めるかトグルスイッチで選択します。",
-        "tool-screen-step3": "録画停止後、内蔵プレビューで確認し、「Save WebM」ボタンでPCにダウンロードします。",
+        "app-pocketblack-title": "PocketBlack: 画面OFF風タッチガード",
+        "app-pocketblack-desc": "動画・音楽の再生中やポケット内で純黒のスクリーンを表示し、有機EL（OLED）のバッテリー節約＆誤タッチを完全ガード。",
+        "app-pocketblack-tag1": "誤タッチ防止",
+        "app-pocketblack-tag2": "OLED省電力",
+        "app-pocketblack-tag3": "バックグラウンド再生",
 
-        "tool-css-title": "CSS Generator",
-        "tool-css-desc": "グラデーション、フレックスボックス、グリッド、ネオン影などのモダンなCSSスタイルを視覚的なスライダーで調整し、コードをコピーできる開発ツール。",
-        "tool-css-tag1": "フロントエンド",
-        "tool-css-tag2": "CSS生成",
-        "tool-css-tag3": "効率化",
-        "tool-css-step1": "調整したいCSS効果（例: Box Shadow, Flexbox Layout）を左メニューから選択します。",
-        "tool-css-step2": "スライダーやカラーピッカーを動かし、右側のライブプレビューを見ながら調整します。",
-        "tool-css-step3": "生成されたCSSコードを「Copy Code」ボタンでワンクリックコピーし、プロジェクトに貼り付けます。",
+        "app-notibatch-title": "NotiBatch: 通知まとめ・集中タイマー",
+        "app-notibatch-desc": "頻繁に届くアプリ通知を一時保留し、指定した時間にまとめてダイジェスト配信。作業や勉強の集中力を途切れさせない。",
+        "app-notibatch-tag1": "通知ダイジェスト",
+        "app-notibatch-tag2": "ポモドーロ集中",
+        "app-notibatch-tag3": "通知履歴",
 
-        "tool-prompt-title": "Prompt Sandbox",
-        "tool-prompt-desc": "複雑なプロンプトのテンプレートに変数をバインドし、動的に入力フォームを生成して最終的なプロンプトを合成・コピーできるLLM用Sandbox。",
-        "tool-prompt-tag1": "AI・LLM",
-        "tool-prompt-tag2": "効率化",
-        "tool-prompt-tag3": "テンプレート",
-        "tool-prompt-step1": "「Template Library」からプリセットを選択するか、エディタに変数を表す `{{変数名}}` を含むプロンプトを入力します。",
-        "tool-prompt-step2": "自動生成されたフォームに入力値（ペルソナ、出力フォーマットなど）を入力すると、下のプレビューに瞬時に反映されます。",
-        "tool-prompt-step3": "「Copy Prompt」ボタンで合成済みの最終テキストをコピーしてAIチャット等に貼り付けて使用します。",
-
-        "tool-svg-title": "SVG Wave & Blob Generator",
-        "tool-svg-desc": "頂点数や複雑さをスライダーで変化させ、美しい波形（Wave）や有機的なBlob（アメーバ）図形のSVGコードをランダム生成・ダウンロードできるWebツール。",
-        "tool-svg-tag1": "SVG生成",
-        "tool-svg-tag2": "ランダム",
-        "tool-svg-tag3": "ベクター出力",
-        "tool-svg-step1": "生成したい図形タイプ（Wave または Blob）を選択します。",
-        "tool-svg-step2": "スライダーで頂点数、複雑さ、グラデーションの色をカスタマイズします。",
-        "tool-svg-step3": "「Randomize」で形状をランダムに変化させ、気に入った形状のSVGコードをコピーまたはダウンロードします。",
-
-        "tool-se-title": "SE Generator",
-        "tool-se-desc": "正弦波、矩形波、三角波、マイク入力などをサンプリングし、ピッチ調整やエコーを適用して好みの効果音（SE）を生成・再生・ダウンロードできるツール。",
-        "tool-se-tag1": "音声合成",
-        "tool-se-tag2": "効果音",
-        "tool-se-tag3": "録音",
-        "tool-se-step1": "音源（正弦波、矩形波、三角波、またはマイク録音）を選択します。",
-        "tool-se-step2": "再生時間、ピッチ変化、エコー（ディレイ）などのエフェクトパラメータを調整します。",
-        "tool-se-step3": "「Play」で試聴し、ランダム機能で面白い音を発見し、「Download WAV」で書き出します。",
-
-        // Mobile Apps
         "app-sonic-title": "SonicFix: 水抜き・音波掃除",
         "app-sonic-desc": "スピーカーに入り込んだ水滴やホコリを共振音波と超音波微振動で安全に弾き飛ばす排水アプリ。PCM周波数トーン生成や音響診断機能も搭載。",
         "app-sonic-tag1": "音波水抜き",
@@ -157,101 +107,51 @@ const translations = {
         "app-fan-tag3": "タイマー搭載"
     },
     en: {
-        "nav-web": "Web Tools",
         "nav-mobile": "Mobile Apps",
         "hero-title": "No server processing required.<br><span class=\"gradient-text\">Everything runs on your device.</span>",
-        "hero-subtitle": "T9S Studio's tools run entirely within your browser (WebAssembly/IndexedDB) or local device without sending data to external servers. Safe, fast, and completely free.",
-        "section-web-title": "Web Utilities <span class=\"section-subtitle\">(Browser-only Web Tools)</span>",
+        "hero-subtitle": "T9S Studio's apps operate safely on your device without sending private data to external servers. High performance, zero hassle, and built for privacy.",
         "section-mobile-title": "Mobile Applications <span class=\"section-subtitle\">(Android Native Apps)</span>",
         "footer-text": "&copy; 2026 T9S Studio. All rights reserved. Built with pride using vanilla client-side technologies.",
         "footer-privacy": "All data is safely stored and processed only in the user's local environment. No automatic transmission to servers.",
-        "launch-tool": "Launch Tool",
         "download-play": "Get it on Google Play",
-        "show-usage": "💡 Show Usage",
 
-        // Web Tools
-        "tool-mockup-title": "Mockup Studio",
-        "tool-mockup-desc": "A mockup generator that wraps your screenshots in sleek 3D-style device frames like iPhone and MacBook.",
-        "tool-mockup-tag1": "Browser-only",
-        "tool-mockup-tag2": "PNG Output",
-        "tool-mockup-tag3": "Pro Key Support",
-        "tool-mockup-step1": "Upload or drag and drop your screenshot image.",
-        "tool-mockup-step2": "Select device frame (iPhone/MacBook etc.) and bezel color (Space Gray/Gold etc.).",
-        "tool-mockup-step3": "Configure captions (font size, color) if needed, and download the exported image.",
+        // Mobile Apps (16 Apps)
+        "app-snore-title": "SnoreWhisper: Sleep & Snore",
+        "app-snore-desc": "Smart snore and sleep talk tracker with on-device detection. Safely analyzes sleep quality and records audio without cloud uploads.",
+        "app-snore-tag1": "On-Device AI",
+        "app-snore-tag2": "Snore Tracker",
+        "app-snore-tag3": "Privacy First",
 
-        "tool-git-title": "Git Visualizer",
-        "tool-git-desc": "An interactive simulator to learn how Git commands modify the branch tree and commit graph visually.",
-        "tool-git-tag1": "Git Learning",
-        "tool-git-tag2": "Interactive",
-        "tool-git-tag3": "Sandbox",
-        "tool-git-step1": "Select 'Lessons' from the left menu or start 'Sandbox' mode.",
-        "tool-git-step2": "Type commands like `git commit` or `git checkout` in the terminal input.",
-        "tool-git-step3": "Watch the commit tree dynamically animate to visually understand branches and HEAD.",
+        "app-rebell-title": "ReBell: Persistent Reminder",
+        "app-rebell-desc": "Persistent reminder that repeats notifications until you complete the task. Never miss essential meds or appointments again.",
+        "app-rebell-tag1": "Persistent Alert",
+        "app-rebell-tag2": "Snooze Lock",
+        "app-rebell-tag3": "Alarm",
 
-        "tool-oss-title": "OSS Alternatives",
-        "tool-oss-desc": "A curated database to discover excellent, privacy-focused open source alternatives to popular commercial software and SaaS.",
-        "tool-oss-tag1": "Alternatives",
-        "tool-oss-tag2": "OSS Focus",
-        "tool-oss-tag3": "GitHub API",
-        "tool-oss-step1": "Type the software name (e.g., Photoshop, Slack) in the search bar or select a category.",
-        "tool-oss-step2": "View GitHub stars, last update dates, and license info in real-time.",
-        "tool-oss-step3": "Visit the tool's official website via the link to find the best match for you.",
+        "app-noexif-title": "NoExif: Photo Location Remover",
+        "app-noexif-desc": "Losslessly strip GPS location, camera model, and private Exif metadata from photos and videos before sharing on social media.",
+        "app-noexif-tag1": "Exif Remover",
+        "app-noexif-tag2": "Lossless",
+        "app-noexif-tag3": "100% Offline",
 
-        "tool-pixel-title": "Pixel Art Editor",
-        "tool-pixel-desc": "An intuitive web-based editor to create and edit pixel art, featuring layer support, custom palettes, and GIF animation export.",
-        "tool-pixel-tag1": "Image Editor",
-        "tool-pixel-tag2": "Pixel Art",
-        "tool-pixel-tag3": "GIF Export",
-        "tool-pixel-step1": "Select canvas size (e.g., 16x16, 32x32) and start drawing.",
-        "tool-pixel-step2": "Pick colors and draw using pencil, bucket, and eraser tools.",
-        "tool-pixel-step3": "Click 'Export' to save your art as an enlarged PNG or animated GIF.",
+        "app-floatcalc-title": "FloatCalc: Floating Calculator",
+        "app-floatcalc-desc": "Floating calculator that stays on top of any app. Features customizable preset buttons (tax/shipping) and quick text snippets.",
+        "app-floatcalc-tag1": "Floating Overlay",
+        "app-floatcalc-tag2": "Snippets",
+        "app-floatcalc-tag3": "Tax & Fee Calc",
 
-        "tool-screen-title": "Screen Recorder",
-        "tool-screen-desc": "A browser-only tool to record your screen, microphone, and system audio entirely locally without external servers, exporting as WebM.",
-        "tool-screen-tag1": "Screen Recorder",
-        "tool-screen-tag2": "Audio Capture",
-        "tool-screen-tag3": "Browser-only",
-        "tool-screen-step1": "Select what to record (entire screen, application window, or browser tab).",
-        "tool-screen-step2": "Choose whether to include microphone or system audio.",
-        "tool-screen-step3": "After stopping, preview the recording and download it as WebM.",
+        "app-pocketblack-title": "PocketBlack: Touch Lock & Dim",
+        "app-pocketblack-desc": "Pure black overlay that prevents accidental touches in your pocket and saves battery on OLED screens while audio/video keeps playing.",
+        "app-pocketblack-tag1": "Touch Lock",
+        "app-pocketblack-tag2": "OLED Battery Saver",
+        "app-pocketblack-tag3": "Overlay",
 
-        "tool-css-title": "CSS Generator",
-        "tool-css-desc": "A developer utility to visually design CSS gradients, flexbox layouts, grids, and shadows using sliders, and copy the code.",
-        "tool-css-tag1": "Front-end",
-        "tool-css-tag2": "CSS Gen",
-        "tool-css-tag3": "Productive",
-        "tool-css-step1": "Select the CSS effect (e.g., Box Shadow, Flexbox) from the menu.",
-        "tool-css-step2": "Adjust sliders and colors while watching the live preview.",
-        "tool-css-step3": "Click 'Copy Code' to copy the generated CSS and paste it into your stylesheet.",
+        "app-notibatch-title": "NotiBatch: Notification Digest",
+        "app-notibatch-desc": "Bundle distracting notifications and deliver them in scheduled digests. Boost focus during work and study without missing important alerts.",
+        "app-notibatch-tag1": "Notification Digest",
+        "app-notibatch-tag2": "Focus Timer",
+        "app-notibatch-tag3": "Alert Log",
 
-        "tool-prompt-title": "Prompt Sandbox",
-        "tool-prompt-desc": "An LLM prompt sandbox that binds variables to templates, auto-generates input forms, and exports compiled prompts.",
-        "tool-prompt-tag1": "AI & LLM",
-        "tool-prompt-tag2": "Productive",
-        "tool-prompt-tag3": "Templates",
-        "tool-prompt-step1": "Select a preset from the template library or type a custom prompt containing `{{variables}}`.",
-        "tool-prompt-step2": "Fill in the generated input fields (persona, format, etc.) to see updates in the preview.",
-        "tool-prompt-step3": "Click 'Copy Prompt' to copy the compiled text and use it with ChatGPT, Claude, etc.",
-
-        "tool-svg-title": "SVG Wave & Blob Generator",
-        "tool-svg-desc": "A web tool to randomly generate and download beautiful SVG waves and organic blob shapes by adjusting complexity sliders.",
-        "tool-svg-tag1": "SVG Gen",
-        "tool-svg-tag2": "Randomize",
-        "tool-svg-tag3": "Vector Export",
-        "tool-svg-step1": "Select the shape type (Wave or Blob).",
-        "tool-svg-step2": "Use sliders to customize complexity, vertices, and gradient colors.",
-        "tool-svg-step3": "Click 'Randomize' to morph the shape and copy/download the SVG code.",
-
-        "tool-se-title": "SE Generator",
-        "tool-se-desc": "An audio tool to generate, play, and download custom sound effects by sampling waves or microphone input, with pitch and echo filters.",
-        "tool-se-tag1": "Audio Synth",
-        "tool-se-tag2": "Sound Effect",
-        "tool-se-tag3": "Recording",
-        "tool-se-step1": "Select the sound source (sine, square, triangle, or mic recording).",
-        "tool-se-step2": "Adjust duration, pitch modulation, and echo (delay) parameters.",
-        "tool-se-step3": "Listen using 'Play', randomize for unique sounds, and click 'Download WAV'.",
-
-        // Mobile Apps
         "app-sonic-title": "SonicFix: Speaker Water Eject",
         "app-sonic-desc": "Expel trapped water and dust from speakers using resonant sound waves and micro-vibrations. Features PCM tone generator and audio diagnostics.",
         "app-sonic-tag1": "Water Eject",
@@ -365,78 +265,55 @@ function applyTranslations(lang) {
         }
     });
 
-    // 3. Webツールカードの動的翻訳（インデックス順マッピング）
-    const webCards = document.querySelectorAll("#web-tools .app-card");
-    const webKeys = ["mockup", "git", "oss", "pixel", "screen", "css", "prompt", "svg", "se"];
-    webCards.forEach((card, idx) => {
-        const key = webKeys[idx];
-        if (!key) return;
-        
-        const titleEl = card.querySelector(".card-header-row h4");
-        if (titleEl) titleEl.textContent = dict[`tool-${key}-title`] || titleEl.textContent;
-        
-        const descEl = card.querySelector(".card-desc");
-        if (descEl) descEl.textContent = dict[`tool-${key}-desc`] || descEl.textContent;
-        
-        const tags = card.querySelectorAll(".card-tags .tag");
-        tags.forEach((tag, tIdx) => {
-            if (dict[`tool-${key}-tag${tIdx+1}`]) {
-                tag.textContent = dict[`tool-${key}-tag${tIdx+1}`];
-            }
-        });
-        
-        const summary = card.querySelector(".usage-summary");
-        if (summary) summary.innerHTML = `💡 ${dict["show-usage"] || "Show Usage"}`;
-        
-        const steps = card.querySelectorAll(".usage-steps li");
-        steps.forEach((step, sIdx) => {
-            if (dict[`tool-${key}-step${sIdx+1}`]) {
-                step.textContent = dict[`tool-${key}-step${sIdx+1}`];
-            }
-        });
-        
-        const btn = card.querySelector(".card-actions .btn");
-        if (btn) btn.textContent = dict["launch-tool"] || btn.textContent;
-    });
-
-    // 4. モバイルアプリカードの動的翻訳（インデックス順マッピング）
+    // 3. モバイルアプリカードの動的翻訳（インデックス順マッピング）
     const mobileCards = document.querySelectorAll("#mobile-apps .app-card");
-    const mobileKeys = ["sonic", "ledger", "shrink", "koyaku", "zen", "netbash", "nosavecrop", "spin", "dopa", "fan"];
+    const mobileKeys = [
+        "snore", "rebell", "noexif", "floatcalc", "pocketblack", "notibatch",
+        "sonic", "ledger", "shrink", "koyaku",
+        "zen", "netbash", "nosavecrop", "spin", "dopa", "fan"
+    ];
+
     mobileCards.forEach((card, idx) => {
         const key = mobileKeys[idx];
         if (!key) return;
-        
+
         const titleEl = card.querySelector(".card-header-row h4");
-        if (titleEl) titleEl.textContent = dict[`app-${key}-title`] || titleEl.textContent;
-        
+        if (titleEl && dict[`app-${key}-title`]) {
+            titleEl.textContent = dict[`app-${key}-title`];
+        }
+
         const descEl = card.querySelector(".card-desc");
-        if (descEl) descEl.textContent = dict[`app-${key}-desc`] || descEl.textContent;
-        
+        if (descEl && dict[`app-${key}-desc`]) {
+            descEl.textContent = dict[`app-${key}-desc`];
+        }
+
         const tags = card.querySelectorAll(".card-tags .tag");
         tags.forEach((tag, tIdx) => {
             if (dict[`app-${key}-tag${tIdx+1}`]) {
                 tag.textContent = dict[`app-${key}-tag${tIdx+1}`];
             }
         });
-        
+
         const btn = card.querySelector(".card-actions .btn");
-        if (btn) btn.textContent = dict["download-play"] || btn.textContent;
+        if (btn && dict["download-play"]) {
+            btn.textContent = dict["download-play"];
+        }
     });
 
-    // 5. ドキュメントメタ情報の書き換え
+    // 4. ドキュメントメタ情報の書き換え
     document.title = lang === "ja" 
-        ? "T9S Studio - ブラウザ完結型ツール＆モバイルアプリ" 
-        : "T9S Studio - Serverless Web Utilities & Mobile Apps";
+        ? "T9S Studio - 高機能・プライバシー特化Androidアプリ" 
+        : "T9S Studio - High-Performance, Privacy-First Android Apps";
         
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
         metaDesc.setAttribute("content", lang === "ja"
-            ? "T9S Studioが開発する、プライバシー第一で超高速に動作するWebユーティリティおよびモバイルアプリのポートフォリオハブです。"
-            : "Portfolio hub of high-performance, privacy-first web utilities and Android mobile applications built by T9S Studio."
+            ? "T9S Studioが開発する、プライバシー第一で超高速に動作する高品質Androidネイティブアプリのポートフォリオハブです。"
+            : "Portfolio hub of high-performance, privacy-first Android native applications built by T9S Studio."
         );
     }
 
-    // 6. 言語選択ボタンのトグル状態の変更
+    // 5. 言語選択ボタンのトグル状態の変更
     document.querySelectorAll(".btn-lang").forEach(btn => {
         btn.classList.remove("active");
     });
@@ -445,7 +322,7 @@ function applyTranslations(lang) {
         activeBtn.classList.add("active");
     }
 
-    // 7. HTMLタグのlang属性を変更
+    // 6. HTMLタグのlang属性を変更
     document.documentElement.setAttribute("lang", lang);
 }
 

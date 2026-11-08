@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T9S Studio - ブラウザ完結型ツール＆モバイルアプリ</title>
-    <meta name="description" content="T9S Studioが開発する、プライバシー第一で超高速に動作するWebユーティリティおよびモバイルアプリのポートフォリオハブです。">
+    <title>T9S Studio - 高機能・プライバシー特化Androidアプリ</title>
+    <meta name="description" content="T9S Studioが開発する、プライバシー第一で超高速に動作する高品質Androidネイティブアプリのポートフォリオハブです。">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +27,6 @@
                 </div>
             </div>
             <div class="header-nav">
-                <a href="#web-tools" class="nav-link" data-i18n="nav-web">Web Tools</a>
                 <a href="#mobile-apps" class="nav-link" data-i18n="nav-mobile">Mobile Apps</a>
                 <div class="lang-switcher">
                     <button class="btn-lang" id="btn-lang-ja" onclick="setLanguage('ja')">JA</button>
@@ -40,350 +39,146 @@
         <section class="hero-section">
             <h2 class="hero-title" data-i18n-html="hero-title">余計なサーバー処理は不要。<br><span class="gradient-text">あなたのデバイス上で完結。</span></h2>
             <p class="hero-subtitle" data-i18n="hero-subtitle">
-                T9S Studio のツールは、データを外部のサーバーに送信せず、すべてブラウザ内（WebAssembly/IndexedDB）またはローカルデバイス上で動作します。安全、超高速、そして完全無料。
+                T9S Studio のアプリは、個人データを外部サーバーに送信せず、すべてお使いのデバイス上で安全に動作します。プライバシー第一、超高速、そして快適なモバイル体験をお届けします。
             </p>
-        </section>
-
-        <!-- メインセクション：Webツール -->
-        <section class="section-container" id="web-tools">
-            <h3 class="section-title" data-i18n-html="section-web-title">Web Utilities <span class="section-subtitle">(ブラウザ完結型Webツール)</span></h3>
-            <div class="card-grid">
-                <!-- Mockup Studio -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">📸</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>Mockup Studio</h4>
-                            <span class="badge badge-accent">WebAssembly</span>
-                        </div>
-                        <p class="card-desc">スクリーンショットをアップロードするだけで、iPhoneやMacBookなどの洗練された3D風デバイスフレームに合成できるモックアップジェネレーター。</p>
-                        <div class="card-tags">
-                            <span class="tag">ブラウザ処理</span>
-                            <span class="tag">PNG出力</span>
-                            <span class="tag">Pro版キー対応</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>スクリーンショット画像をアップロードするか、ドラッグ＆ドロップします。</li>
-                                <li>デバイスフレーム（iPhone/MacBookなど）やベゼルのカラー（Space Gray/Goldなど）を選択します。</li>
-                                <li>必要に応じてキャプション（文字サイズ・色）を設定し、ダウンロードボタンで画像を書き出します。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./mockup-studio/" class="btn btn-primary btn-block" id="launch-mockup-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Git Visualizer -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">🌲</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>Git Visualizer</h4>
-                            <span class="badge badge-primary">SVG Interactive</span>
-                        </div>
-                        <p class="card-desc">インタラクティブにGitコマンドを打ち込み、ブランチツリーやコミットグラフがどのように動くかをビジュアルで学習できるシミュレータ。</p>
-                        <div class="card-tags">
-                            <span class="tag">Git学習</span>
-                            <span class="tag">インタラクティブ</span>
-                            <span class="tag">Sandbox</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>左メニューから「レッスン」を選択するか、「Sandbox（自由入力）」モードを開始します。</li>
-                                <li>右上のターミナル疑似入力欄に `git commit` や `git checkout` などのコマンドを入力します。</li>
-                                <li>コミットツリーが動的に変化し、ブランチやHEADの概念をアニメーションで視覚的に学習できます。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./git-visualizer/" class="btn btn-primary btn-block" id="launch-git-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- OSS Alternatives -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">📋</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>OSS Alternatives</h4>
-                            <span class="badge badge-success">GitHub API</span>
-                        </div>
-                        <p class="card-desc">NotionやSlack、Firebaseなどの主要SaaSの代替となる、セルフホスト可能な人気オープンソースソフトウェア(OSS)の比較ディレクトリ。</p>
-                        <div class="card-tags">
-                            <span class="tag">OSSデータベース</span>
-                            <span class="tag">スター数比較</span>
-                            <span class="tag">インフラ紹介</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>Notionなどの商用SaaSに対応する、セルフホスト可能な人気オープンソース（OSS）の一覧を比較します。</li>
-                                <li>「詳細・自己ホスト」をクリックすると、商用SaaS vs OSSのスペック・コスト対比表がポップアップします。</li>
-                                <li>比較情報をもとに、DigitalOceanリファラル枠からワンクリックで仮想サーバーを立てて導入できます。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./oss-alternatives/" class="btn btn-primary btn-block" id="launch-oss-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- SVG Generator -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">🎨</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>SVG Wave & Blob Generator</h4>
-                            <span class="badge badge-accent">SVG Vector</span>
-                        </div>
-                        <p class="card-desc">有機的なアメーバ状Blobや滑らかな波形をパラメータ調整で簡単に出力できるデザイナー向けグラフィックツール。</p>
-                        <div class="card-tags">
-                            <span class="tag">SVG/PNGエクスポート</span>
-                            <span class="tag">アニメーション</span>
-                            <span class="tag">マルチレイヤー</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>「Shape Type」でBlob（アメーバ型）またはWave（波形型）を選択します。</li>
-                                <li>スライダーで頂点数（Complexity）やゆらぎの強さ（Growth）、カラー（単色/グラデーション）を調整します。</li>
-                                <li>「Download SVG」でベクター素材を、「Export PNG」で画像を書き出します（Pro版でアニメーション化も可）。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./svg-generator/" class="btn btn-primary btn-block" id="launch-svg-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- JSON Converter -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">📋</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>JSON Schema Converter</h4>
-                            <span class="badge badge-primary">JSON/YAML/XML</span>
-                        </div>
-                        <p class="card-desc">JSONのパース、バリデーションに加え、YAML、XML、CSVやTypeScript/Go言語の型定義コードへ瞬時に相互変換するツール。</p>
-                        <div class="card-tags">
-                            <span class="tag">データ変換</span>
-                            <span class="tag">型定義生成</span>
-                            <span class="tag">ダミー生成</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>左側の「Input JSON」エディタに、整形または変換したいJSONデータを貼り付けます（エラーがあれば自動で赤色警告）。</li>
-                                <li>「Convert To」セレクトボックスから、YAML/XML/CSVや型定義（TypeScript/Go/Java）を選択します。</li>
-                                <li>「Convert Data」ボタンをクリックすると、右側のエディタに変換結果が高速出力されます。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./json-converter/" class="btn btn-primary btn-block" id="launch-json-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Regex Playground -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">🌲</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>Regex Playground</h4>
-                            <span class="badge badge-success">Regex Real-time</span>
-                        </div>
-                        <p class="card-desc">正規表現をリアルタイムにマッチハイライトし、その文法構造を分かりやすくステップバイステップで分解解説するPlaygroundツール。</p>
-                        <div class="card-tags">
-                            <span class="tag">正規表現テスト</span>
-                            <span class="tag">マッチハイライト</span>
-                            <span class="tag">AIモック生成</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>「Expression Pattern」に正規表現を、「Test String」にテストしたい文章を入力します（テンプレート利用も可）。</li>
-                                <li>テスト文字列内のマッチした部分がリアルタイムで黄色くハイライトされ、一致件数がバッジで表示されます。</li>
-                                <li>Pro版をアンロックすると、正規表現を細かく分解した日本語解説や、自然言語からのパターン自動生成が使えます。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./regex-playground/" class="btn btn-primary btn-block" id="launch-regex-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- SFX Generator -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">🔊</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>Web SFX Generator</h4>
-                            <span class="badge badge-accent">Web Audio API</span>
-                        </div>
-                        <p class="card-desc">正弦波・矩形波・三角波等のシンセサイザー音波やマイク録音をサンプリングし、ピッチやエコー等を自由に加工してSEを作成・WAV保存できるツール。</p>
-                        <div class="card-tags">
-                            <span class="tag">シンセ・録音</span>
-                            <span class="tag">エフェクト加工</span>
-                            <span class="tag">WAV出力</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>音源タイプ（シンセサイザーの波形、または「マイク録音」）を選択し、ベース音を入力または録音します。</li>
-                                <li>スライダーで周波数、ADSR、ピッチ（音程・速度）、エコー（ディレイ）、フィルター、ディストーションを調整します。</li>
-                                <li>「再生」で試聴し、気に入ったら「Download WAV」でSEファイルを書き出します（ランダムSE合成も可能）。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./sfx-generator/" class="btn btn-primary btn-block" id="launch-sfx-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Pixel Art Editor -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">🎨</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>Pixel Art Editor</h4>
-                            <span class="badge badge-accent">Canvas Sprite</span>
-                        </div>
-                        <p class="card-desc">グリッド上でドット絵を描画し、複数フレームのアニメーションプレビューや、スプライトシート画像（PNG）としてエクスポートできるツール。</p>
-                        <div class="card-tags">
-                            <span class="tag">ドット絵</span>
-                            <span class="tag">スプライトシート</span>
-                            <span class="tag">アニメーション</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>グリッドサイズ（8x8、16x16、32x32）を選択し、カラーパレットから色を選んでキャンバスを塗ります。</li>
-                                <li>アニメーションを作る場合は、「フレーム追加」を押し、パラパラマンガのように次のフレームを描きます（再生で動きをテスト）。</li>
-                                <li>「Export Sprite」でスプライトシート画像（PNG）を、「Export Frame」で単体画像をダウンロードします。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./pixel-art-editor/" class="btn btn-primary btn-block" id="launch-pixel-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Screen Recorder -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">🎥</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>Screen Recorder & GIF</h4>
-                            <span class="badge badge-primary">WebRTC/gifshot</span>
-                        </div>
-                        <p class="card-desc">ブラウザから画面をワンクリック録画し、余計なダウンロードを挟まずその場で高品質なGIFアニメーションやWebM動画に変換できるツール。</p>
-                        <div class="card-tags">
-                            <span class="tag">画面キャプチャ</span>
-                            <span class="tag">GIF変換</span>
-                            <span class="tag">ビデオプレビュー</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>「Record Screen」を押し、キャプチャしたい画面、アプリケーションウィンドウ、またはブラウザのタブを選択します。</li>
-                                <li>録画が開始されたら必要な操作を行い、終わったら「Stop」を押してプレビュービデオで確認します。</li>
-                                <li>「Convert to GIF」をクリックすると数秒でGIF化され、保存できます（Pro版でトリミング等の詳細設定が可能）。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./screen-recorder/" class="btn btn-primary btn-block" id="launch-recorder-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- CSS Generator -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">💅</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>CSS UI Generator</h4>
-                            <span class="badge badge-success">CSS/Tailwind</span>
-                        </div>
-                        <p class="card-desc">ガラス質感（グラスモーフィズム）や多重シャドウ、ニューモーフィズムなどの美しいCSS / Tailwind CSSコードを直感的に生成できるデザイナー向けツール。</p>
-                        <div class="card-tags">
-                            <span class="tag">Glassmorphism</span>
-                            <span class="tag">Neumorphism</span>
-                            <span class="tag">CSSコード出力</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>「UI Style」でGlass（ガラス）、Shadow（多重影）、またはNeumorphic（ニューモーフィズム）を選択します。</li>
-                                <li>スライダーを調整し、ぼかしの深さ、不透明度、色、影の位置をリアルタイムでプレビューしながら調整します。</li>
-                                <li>下部に自動生成された「CSS」または「Tailwind」タブを選択し、ワンクリックでコードをコピーして利用します。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./css-generator/" class="btn btn-primary btn-block" id="launch-css-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Prompt Sandbox -->
-                <article class="app-card">
-                    <div class="card-icon-wrapper">
-                        <span class="card-icon">🌲</span>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-header-row">
-                            <h4>AI Prompt Sandbox</h4>
-                            <span class="badge badge-accent">AI Prompt Templates</span>
-                        </div>
-                        <p class="card-desc">変数が埋め込まれたプロンプトをインポートし、入力フォームから文字を入れるだけで最終的なAIプロンプトを合成・ワンクリックコピーできるツール。</p>
-                        <div class="card-tags">
-                            <span class="tag">AIプロンプト</span>
-                            <span class="tag">テンプレート管理</span>
-                            <span class="tag">動的フォーム</span>
-                        </div>
-                        <details class="usage-details">
-                            <summary class="usage-summary">💡 使い方を表示</summary>
-                            <ol class="usage-steps">
-                                <li>「Template Library」からプリセットを選択するか、エディタに変数を表す `{{変数名}}` を含むプロンプトを自由に入力します。</li>
-                                <li>自動生成されたフォームに入力値（ペルソナ、出力フォーマットなど）を入力すると、下のプレビューに瞬時に反映されます。</li>
-                                <li>「Copy Prompt」ボタンで合成済みの最終テキストをコピーしてChatGPTやClaudeなどに貼り付けて使用します。</li>
-                            </ol>
-                        </details>
-                        <div class="card-actions">
-                            <a href="./prompt-sandbox/" class="btn btn-primary btn-block" id="launch-prompt-btn">ツールを起動する</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
         </section>
 
         <!-- メインセクション：モバイルアプリ -->
         <section class="section-container" id="mobile-apps">
             <h3 class="section-title" data-i18n-html="section-mobile-title">Mobile Applications <span class="section-subtitle">(Androidネイティブアプリ)</span></h3>
             <div class="card-grid">
+                <!-- SnoreWhisper -->
+                <article class="app-card">
+                    <div class="card-image-header" style="background: linear-gradient(135deg, #1e1b4b, #312e81);">
+                        <span class="app-logo-large">🌙</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>SnoreWhisper - 快眠・いびき記録</h4>
+                            <span class="badge badge-info">Android</span>
+                        </div>
+                        <p class="card-desc">睡眠中のいびきや寝言をスマートに自動検知・録音・分析。完全オンデバイス処理でプライバシーを守りながら睡眠の質を可視化。</p>
+                        <div class="card-tags">
+                            <span class="tag">オンデバイスAI</span>
+                            <span class="tag">いびき検知</span>
+                            <span class="tag">プライバシー保護</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://play.google.com/store/apps/details?id=jp.tpp.t9s.snorewhisper" target="_blank" class="btn btn-primary btn-block" id="download-snorewhisper-btn">Google Play で入手</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ReBell -->
+                <article class="app-card">
+                    <div class="card-image-header" style="background: linear-gradient(135deg, #e11d48, #9f1239);">
+                        <span class="app-logo-large">🔔</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>ReBell: しつこいリマインダー・繰り返し通知</h4>
+                            <span class="badge badge-info">Android</span>
+                        </div>
+                        <p class="card-desc">タスクを完了するまで何度でもしつこく鳴り続ける強力リマインダー。重要な服薬や予定のうっかり忘れを確実に防止。</p>
+                        <div class="card-tags">
+                            <span class="tag">しつこい通知</span>
+                            <span class="tag">忘れ防止</span>
+                            <span class="tag">フルスクリーンアラーム</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://play.google.com/store/apps/details?id=jp.tpp.t9s.rebell" target="_blank" class="btn btn-primary btn-block" id="download-rebell-btn">Google Play で入手</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- NoExif -->
+                <article class="app-card">
+                    <div class="card-image-header" style="background: linear-gradient(135deg, #0d9488, #115e59);">
+                        <span class="app-logo-large">🛡️</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>NoExif: 写真の位置情報・Exif削除</h4>
+                            <span class="badge badge-info">Android</span>
+                        </div>
+                        <p class="card-desc">写真や動画からGPS位置情報や撮影日時、端末情報を無劣化で一括削除。SNS投稿前のプライバシー漏洩を完全ガード。</p>
+                        <div class="card-tags">
+                            <span class="tag">Exif一括削除</span>
+                            <span class="tag">無劣化処理</span>
+                            <span class="tag">100% オフライン</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://play.google.com/store/apps/details?id=jp.tpp.t9s.noexif" target="_blank" class="btn btn-primary btn-block" id="download-noexif-btn">Google Play で入手</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- FloatCalc -->
+                <article class="app-card">
+                    <div class="card-image-header" style="background: linear-gradient(135deg, #d97706, #b45309);">
+                        <span class="app-logo-large">🧮</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>FloatCalc - 浮かぶ電卓 & 定型文</h4>
+                            <span class="badge badge-info">Android</span>
+                        </div>
+                        <p class="card-desc">どのアプリを開いていても画面上に浮かぶフローティング電卓。フリマ計算やよく使う定型文・住所のワンタップコピーも搭載。</p>
+                        <div class="card-tags">
+                            <span class="tag">画面上常駐</span>
+                            <span class="tag">定型文クリップ</span>
+                            <span class="tag">税込・手数料計算</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://play.google.com/store/apps/details?id=jp.tpp.t9s.floatcalc" target="_blank" class="btn btn-primary btn-block" id="download-floatcalc-btn">Google Play で入手</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- PocketBlack -->
+                <article class="app-card">
+                    <div class="card-image-header" style="background: linear-gradient(135deg, #09090b, #27272a);">
+                        <span class="app-logo-large">📱</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>PocketBlack: 画面OFF風タッチガード</h4>
+                            <span class="badge badge-info">Android</span>
+                        </div>
+                        <p class="card-desc">動画・音楽の再生中やポケット内で純黒のスクリーンを表示し、有機EL（OLED）のバッテリー節約＆誤タッチを完全ガード。</p>
+                        <div class="card-tags">
+                            <span class="tag">誤タッチ防止</span>
+                            <span class="tag">OLED省電力</span>
+                            <span class="tag">バックグラウンド再生</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://play.google.com/store/apps/details?id=jp.tpp.t9s.pocketblack" target="_blank" class="btn btn-primary btn-block" id="download-pocketblack-btn">Google Play で入手</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- NotiBatch -->
+                <article class="app-card">
+                    <div class="card-image-header" style="background: linear-gradient(135deg, #4f46e5, #3730a3);">
+                        <span class="app-logo-large">📦</span>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-header-row">
+                            <h4>NotiBatch: 通知まとめ・集中タイマー</h4>
+                            <span class="badge badge-info">Android</span>
+                        </div>
+                        <p class="card-desc">頻繁に届くアプリ通知を一時保留し、指定した時間にまとめてダイジェスト配信。作業や勉強の集中力を途切れさせない。</p>
+                        <div class="card-tags">
+                            <span class="tag">通知ダイジェスト</span>
+                            <span class="tag">ポモドーロ集中</span>
+                            <span class="tag">通知履歴</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="https://play.google.com/store/apps/details?id=jp.tpp.t9s.notibatch" target="_blank" class="btn btn-primary btn-block" id="download-notibatch-btn">Google Play で入手</a>
+                        </div>
+                    </div>
+                </article>
+
                 <!-- SonicFix -->
                 <article class="app-card">
                     <div class="card-image-header" style="background: linear-gradient(135deg, #0284c7, #0369a1);">
@@ -612,6 +407,6 @@
             <p class="footer-privacy" data-i18n="footer-privacy">すべてのデータはユーザーのローカル環境でのみ安全に保存・処理されます。サーバーへの自動送信はありません。</p>
         </footer>
     </div>
-    <script src="app.js?v=1.2" defer></script>
+    <script src="app.js?v=1.3" defer></script>
 </body>
 </html>
