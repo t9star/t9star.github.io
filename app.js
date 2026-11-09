@@ -3,12 +3,15 @@ const translations = {
     ja: {
         "portal-subtitle": "Smart & Intuitive Android Applications",
         "nav-mobile": "モバイルアプリ",
+        "nav-privacy": "プライバシーポリシー",
         "hero-title": "手のひらに、気の利いたアイデアを。<br><span class=\"gradient-text\">軽快でスマートなAndroidアプリ。</span>",
         "hero-subtitle": "音波水抜き、オフライン写真圧縮、浮かぶ電卓、集中タイマーから、五感で楽しむリラクゼーションまで。T9S Studio は、日常の「こんなの欲しかった」を形にするシンプルで洗練されたAndroidアプリをお届けします。",
         "section-mobile-title": "Mobile Applications <span class=\"section-subtitle\">(Androidネイティブアプリ)</span>",
         "footer-text": "&copy; 2026 T9S Studio. All rights reserved. Crafted with passion for Android.",
         "footer-privacy": "T9S Studio は、日常を快適にする軽量・安全・シンプルなAndroidアプリをお届けしています。",
+        "footer-privacy-hub": "🔒 アプリのプライバシーポリシー一覧（Policy Hub）",
         "download-play": "Google Play で入手",
+        "card-privacy": "🔒 プライバシーポリシー",
 
         // Mobile Apps (16 Apps)
         "app-snore-title": "SnoreWhisper - 快眠・いびき記録",
@@ -110,12 +113,15 @@ const translations = {
     en: {
         "portal-subtitle": "Smart & Intuitive Android Applications",
         "nav-mobile": "Mobile Apps",
+        "nav-privacy": "Privacy Policy",
         "hero-title": "Clever tools in the palm of your hand.<br><span class=\"gradient-text\">Fast, simple, and intuitive.</span>",
         "hero-subtitle": "From speaker water ejectors and offline photo compression to floating calculators and tactile relaxation apps, T9S Studio builds refined, lightweight Android apps designed for your daily life.",
         "section-mobile-title": "Mobile Applications <span class=\"section-subtitle\">(Android Native Apps)</span>",
         "footer-text": "&copy; 2026 T9S Studio. All rights reserved. Crafted with passion for Android.",
         "footer-privacy": "T9S Studio crafts fast, safe, and intuitive Android apps to make everyday life easier.",
+        "footer-privacy-hub": "🔒 App Privacy Policy Hub",
         "download-play": "Get it on Google Play",
+        "card-privacy": "🔒 Privacy Policy",
 
         // Mobile Apps (16 Apps)
         "app-snore-title": "SnoreWhisper: Sleep & Snore",

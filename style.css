@@ -449,6 +449,44 @@ body {
     margin-bottom: 24px;
 }
 
+.card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.card-privacy-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 11.5px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    padding: 3px 0;
+}
+
+.card-privacy-link:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+.footer-policy-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.footer-policy-link:hover {
+    text-decoration: underline;
+    opacity: 0.85;
+}
+
 .tag {
     font-size: 11px;
     color: var(--text-secondary);
